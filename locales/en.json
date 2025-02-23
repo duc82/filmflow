@@ -1,0 +1,20 @@
+{
+  "head": {
+    "title": "FilmFlow - Smooth watching, showing the flow of movies",
+    "description": "Free online movie websites"
+  },
+  "header": {
+    "series": "Series",
+    "movies": "Movies",
+    "cartoons": "Cartoons",
+    "categories": "Categories",
+    "national": "National",
+    "upcoming": "Upcoming",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "language": {
+    "en": "English",
+    "vi": "Vietnamese"
+  }
+}

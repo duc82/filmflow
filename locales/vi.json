@@ -1,0 +1,20 @@
+{
+  "head": {
+    "title": "FilmFlow - Xem mượt mà, thể hiện dòng chảy của phim ảnh",
+    "description": "Website xem phim online miễn phí"
+  },
+  "header": {
+    "series": "Phim bộ",
+    "movies": "Phim lẻ",
+    "cartoons": "Hoạt hình",
+    "categories": "Thể loại",
+    "national": "Quốc gia",
+    "upcoming": "Sắp chiếu",
+    "light": "Sáng",
+    "dark": "Tối"
+  },
+  "language": {
+    "en": "Tiếng Anh",
+    "vi": "Tiếng Việt"
+  }
+}
