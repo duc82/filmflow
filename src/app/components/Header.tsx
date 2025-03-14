@@ -41,6 +41,16 @@ export default function Header({
     router.push(`/tim-kiem?keyword=${search}`);
   };
 
+  const handleCloseNavbar = () => {
+    document.body.style.overflow = "auto";
+    setIsOpenNavbar(false);
+  };
+
+  const handleOpenNavbar = () => {
+    document.body.style.overflow = "hidden";
+    setIsOpenNavbar(true);
+  };
+
   return (
     <>
       <header className="sticky top-0 z-50 w-full flex-none lg:border-b lg:border-slate-900/10 dark:border-slate-50/[0.06] backdrop-blur bg-white/60 dark:bg-transparent">
@@ -215,7 +225,7 @@ export default function Header({
 
           <div className="ml-2 -my-1 xl:hidden">
             <button
-              onClick={() => setIsOpenNavbar((prev) => !prev)}
+              onClick={handleOpenNavbar}
               className="text-slate-500 w-8 h-8 flex items-center justify-center hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
             >
               <Bars3Icon className="w-6 h-6" />
@@ -255,7 +265,7 @@ export default function Header({
         )}
       >
         <div
-          onClick={() => setIsOpenNavbar(false)}
+          onClick={handleCloseNavbar}
           className={cn(
             "fixed inset-0 bg-black/50 opacity-0 transition-opacity duration-300",
             isOpenNavbar && "opacity-100"
@@ -271,7 +281,7 @@ export default function Header({
           <button
             type="button"
             className="absolute top-2.5 right-2.5"
-            onClick={() => setIsOpenNavbar(false)}
+            onClick={handleCloseNavbar}
           >
             <XMarkIcon className="size-6" />
           </button>
@@ -279,6 +289,7 @@ export default function Header({
             <li>
               <Link
                 href="/danh-sach/phim-bo"
+                onClick={handleCloseNavbar}
                 className="hover:text-sky-500 dark:hover:text-sky-400"
               >
                 Phim Bộ
@@ -287,6 +298,7 @@ export default function Header({
             <li>
               <Link
                 href="/danh-sach/phim-le"
+                onClick={handleCloseNavbar}
                 className="hover:text-sky-500 dark:hover:text-sky-400"
               >
                 Phim Lẻ
@@ -295,6 +307,7 @@ export default function Header({
             <li>
               <Link
                 href="/danh-sach/tv-shows"
+                onClick={handleCloseNavbar}
                 className="hover:text-sky-500 dark:hover:text-sky-400"
               >
                 Shows
@@ -303,6 +316,7 @@ export default function Header({
             <li>
               <Link
                 href="/danh-sach/hoat-hinh"
+                onClick={handleCloseNavbar}
                 className="hover:text-sky-500 dark:hover:text-sky-400"
               >
                 Hoạt Hình
@@ -314,10 +328,11 @@ export default function Header({
                   Thể Loại
                   <ChevronDownIcon className="size-5 ml-1.5 group-data-[open]:rotate-180" />
                 </DisclosureButton>
-                <DisclosurePanel className="flex flex-col pl-2 space-y-2 mt-2 max-h-72 overflow-y-auto">
+                <DisclosurePanel className="flex flex-col pl-2 space-y-2 mt-2 max-h-56 overflow-y-auto">
                   {categories.map((category) => (
                     <Link
                       key={category.slug}
+                      onClick={handleCloseNavbar}
                       href={`/the-loai/${category.slug}`}
                       className="hover:text-sky-500 dark:hover:text-sky-400"
                     >
@@ -333,10 +348,11 @@ export default function Header({
                   Quốc Gia
                   <ChevronDownIcon className="size-5 ml-1.5 group-data-[open]:rotate-180" />
                 </DisclosureButton>
-                <DisclosurePanel className="flex flex-col pl-2 space-y-2 mt-2 max-h-72 overflow-y-auto">
+                <DisclosurePanel className="flex flex-col pl-2 space-y-2 mt-2 max-h-56 overflow-y-auto">
                   {nationals.map((national) => (
                     <Link
                       key={national.slug}
+                      onClick={handleCloseNavbar}
                       href={`/quoc-gia/${national.slug}`}
                       className="hover:text-sky-500 dark:hover:text-sky-400"
                     >
@@ -349,6 +365,7 @@ export default function Header({
             <li>
               <Link
                 href="/danh-sach/phim-sap-chieu"
+                onClick={handleCloseNavbar}
                 className="hover:text-sky-500 dark:hover:text-sky-400"
               >
                 Sắp Chiếu

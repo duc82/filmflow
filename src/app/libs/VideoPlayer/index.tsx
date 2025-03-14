@@ -1,34 +1,35 @@
 "use client";
-import "plyr-react/plyr.css";
-import Hls from "hls.js";
-import { Options } from "plyr";
-import CustomPlyrInstance from "./CustomPlyrInstance";
+import React from "react";
+import VideoJS from "./videoJS";
 
 export default function VideoPlayer({
-  hlsSource,
-  videoOptions,
+  src,
   poster,
-  containerClassName,
+  wrapperClassName,
 }: {
-  hlsSource: string;
-  videoOptions?: Options;
+  src: string;
   poster?: string;
-  containerClassName?: string;
+  wrapperClassName?: string;
 }) {
-  const supported = Hls.isSupported();
-
   return (
-    <div className={containerClassName}>
-      {supported ? (
-        <CustomPlyrInstance
-          source={null}
-          options={videoOptions}
-          hlsSource={hlsSource}
-          poster={poster}
-        />
-      ) : (
-        "HLS is not supported in your browser"
-      )}
+    <div className={wrapperClassName}>
+      <VideoJS
+        options={{
+          autoplay: false,
+          controls: true,
+          responsive: true,
+          fluid: true,
+          playsinline: true,
+          aspectRatio: "16:9",
+          sources: [
+            {
+              src,
+              type: "application/x-mpegURL",
+            },
+          ],
+          poster,
+        }}
+      />
     </div>
   );
 }

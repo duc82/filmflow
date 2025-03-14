@@ -1,4 +1,4 @@
-import MovieListSkeleton from "../components/Home/MovieListSkeleton";
+import MovieListSkeleton from "../components/Skeleton/MovieListSkeleton";
 
 export default function HomeLoading() {
   return (

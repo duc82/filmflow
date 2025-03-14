@@ -11,7 +11,7 @@ import { ChevronUpIcon, HomeIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function Movie({
+export default async function MovieDetail({
   params,
 }: {
   params: Promise<{ slug: string }>;
@@ -67,7 +67,7 @@ export default async function Movie({
                 alt={data.item.name}
                 width={0}
                 height={0}
-                sizes="100vw"
+                sizes="(min-width: 1024px) 20vw, (min-width: 640px) 25vw, 50vw"
                 className="w-full h-auto object-cover rounded-xl"
               />
               <div className="absolute bottom-0 space-x-2 text-center w-full bg-white dark:bg-black bg-opacity-40 dark:bg-opacity-80 py-2 m-0 rounded-t-none rounded-lg">
@@ -78,18 +78,23 @@ export default async function Movie({
                 >
                   Trailer
                 </Link>
-                <button
-                  type="button"
-                  className="cursor-pointer hover:bg-opacity-80 bg-green-500 text-gray-50 dark:text-gray-50 inline-block px-1 py-1 rounded"
-                >
-                  Tải Phim
-                </button>
-                <Link
-                  href={`/xem-phim/${slug}`}
-                  className="cursor-pointer hover:bg-opacity-80 bg-red-500 text-gray-50 dark:text-gray-50 inline-block px-1 py-1 rounded"
-                >
-                  Xem Phim
-                </Link>
+
+                {data.item.episode_current !== "Trailer" && (
+                  <>
+                    <button
+                      type="button"
+                      className="cursor-pointer hover:bg-opacity-80 bg-green-500 text-gray-50 dark:text-gray-50 inline-block px-1 py-1 rounded"
+                    >
+                      Tải Phim
+                    </button>
+                    <Link
+                      href={`/xem-phim/${slug}`}
+                      className="cursor-pointer hover:bg-opacity-80 bg-red-500 text-gray-50 dark:text-gray-50 inline-block px-1 py-1 rounded"
+                    >
+                      Xem Phim
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
             <div className="flex-[0_0_100%] md:flex-[0_0_60%] md:pl-4">
@@ -228,24 +233,31 @@ export default async function Movie({
                 <ChevronUpIcon className="size-5 fill-sky-500 group-data-[open]:rotate-180" />
               </DisclosureButton>
               <DisclosurePanel className="px-4 pb-2 text-sm text-gray-500 dark:text-gray-200">
-                <div className="mb-2 uppercase font-bold">
-                  Server:{" "}
-                  <span className="text-violet-500">
-                    {data.item.episodes[0].server_name}
-                  </span>
-                </div>
-                <div className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-16 gap-2">
-                  {data.item.episodes[0].server_data.map((data) => (
-                    <Link
-                      key={data.slug}
-                      href={`/xem-phim/${slug}?episode=${data.slug}`}
-                      type="button"
-                      className="text-center overflow-hidden overflow-ellipsis whitespace-nowrap px-5 py-1 rounded shadow-md bg-gray-400 text-gray-50 hover:bg-violet-500 dark:bg-slate-600 dark:hover:bg-violet-600"
-                    >
-                      {data.name}
-                    </Link>
-                  ))}
-                </div>
+                {data.item.episode_current !== "Trailer" && (
+                  <>
+                    <div className="mb-2 uppercase font-bold">
+                      Server:{" "}
+                      <span className="text-violet-500">
+                        {data.item.episodes[0].server_name}
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-16 gap-2">
+                      {data.item.episodes[0].server_data.map((data) => (
+                        <Link
+                          key={data.slug}
+                          href={`/xem-phim/${slug}?episode=${data.slug}`}
+                          type="button"
+                          className="text-center overflow-hidden overflow-ellipsis whitespace-nowrap px-5 py-1 rounded shadow-md bg-gray-400 text-gray-50 hover:bg-violet-500 dark:bg-slate-600 dark:hover:bg-violet-600"
+                        >
+                          {data.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </>
+                )}
+
+                {data.item.episode_current === "Trailer" &&
+                  "Link phim đang được cập nhật"}
               </DisclosurePanel>
             </Disclosure>
             <Disclosure defaultOpen={true}>
@@ -284,7 +296,7 @@ export default async function Movie({
                       alt={movie.name}
                       width={0}
                       height={0}
-                      sizes="100vw"
+                      sizes="(min-width: 1024px) 20vw, (min-width: 640px) 25vw, 50vw"
                       className="w-24 object-cover rounded-lg"
                     />
                     <div className="ml-4">
