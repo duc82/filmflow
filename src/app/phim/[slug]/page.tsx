@@ -8,8 +8,29 @@ import {
   DisclosurePanel,
 } from "@headlessui/react";
 import { ChevronUpIcon, HomeIcon } from "@heroicons/react/24/solid";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> => {
+  const { slug } = await params;
+
+  const data = await getMovie<MovieDetailResponse>(slug);
+
+  return {
+    title: data.seoOnPage.titleHead,
+    description: data.seoOnPage.descriptionHead,
+    openGraph: {
+      type: data.seoOnPage.og_type,
+      images: data.seoOnPage.og_image,
+      url: data.seoOnPage.og_url,
+    },
+  };
+};
 
 export default async function MovieDetail({
   params,
@@ -242,16 +263,18 @@ export default async function MovieDetail({
                       </span>
                     </div>
                     <div className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-16 gap-2">
-                      {data.item.episodes[0].server_data.map((data) => (
-                        <Link
-                          key={data.slug}
-                          href={`/xem-phim/${slug}?episode=${data.slug}`}
-                          type="button"
-                          className="text-center overflow-hidden overflow-ellipsis whitespace-nowrap px-5 py-1 rounded shadow-md bg-gray-400 text-gray-50 hover:bg-violet-500 dark:bg-slate-600 dark:hover:bg-violet-600"
-                        >
-                          {data.name}
-                        </Link>
-                      ))}
+                      {data.item.episodes[0].server_data.map(
+                        (data, i, array) => (
+                          <Link
+                            key={i}
+                            href={`/xem-phim/${slug}?episode=${data.slug}`}
+                            type="button"
+                            className="text-center overflow-hidden overflow-ellipsis whitespace-nowrap px-5 py-1 rounded shadow-md bg-gray-400 text-gray-50 hover:bg-violet-500 dark:bg-slate-600 dark:hover:bg-violet-600"
+                          >
+                            {array.length > 1 ? `Tập ${data.name}` : data.name}
+                          </Link>
+                        )
+                      )}
                     </div>
                   </>
                 )}

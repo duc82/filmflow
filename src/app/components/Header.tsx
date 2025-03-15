@@ -20,7 +20,9 @@ import {
 } from "@heroicons/react/24/solid";
 import { FormEvent, useState } from "react";
 import { cn } from "../utils/cn";
-import { useRouter } from "next/navigation";
+import logo from "../assets/logo.png";
+import Image from "next/image";
+import { useRouter } from "@bprogress/next/app";
 
 export default function Header({
   categories,
@@ -39,6 +41,8 @@ export default function Header({
     const formData = new FormData(e.currentTarget);
     const search = formData.get("search") as string;
     router.push(`/tim-kiem?keyword=${search}`);
+    setIsOpenSearch(false);
+    e.currentTarget.reset();
   };
 
   const handleCloseNavbar = () => {
@@ -55,9 +59,11 @@ export default function Header({
     <>
       <header className="sticky top-0 z-50 w-full flex-none lg:border-b lg:border-slate-900/10 dark:border-slate-50/[0.06] backdrop-blur bg-white/60 dark:bg-transparent">
         <div className="max-w-7xl mx-auto p-4 md:px-6 lg:px-8 flex items-center border-b border-slate-900/10 lg:border-none dark:border-slate-300/10">
-          <div className="mr-3 flex-none relative">
+          <div className="mr-4 flex-none relative">
             <span className="sr-only"></span>
-            <Link href="/">Logo</Link>
+            <Link href="/">
+              <Image src={logo} width={150} alt="Logo" />
+            </Link>
           </div>
           <div className="hidden xl:block">
             <form className="group relative" onSubmit={handleSearchMovie}>

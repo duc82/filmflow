@@ -25,7 +25,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwind-merge": "^3.0.2",
-    "video.js": "^8.22.0"
+    "video.js": "^8.22.0",
+    "videojs-hotkeys": "^0.2.30"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

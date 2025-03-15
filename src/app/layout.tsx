@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -21,11 +20,6 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
-
-export const metadata: Metadata = {
-  title: "FilmFlow - Xem mượt mà, thể hiện dòng chảy của phim ảnh",
-  description: "Website xem phim online miễn phí, chất lượng cao",
-};
 
 export default async function RootLayout({
   children,

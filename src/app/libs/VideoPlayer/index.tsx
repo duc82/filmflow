@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import VideoJS from "./videoJS";
+import "videojs-hotkeys";
 
 export default function VideoPlayer({
   src,
@@ -28,6 +29,9 @@ export default function VideoPlayer({
             },
           ],
           poster,
+          plugins: {
+            hotkeys: { volumnStep: 0.1, seekStep: 5 },
+          },
         }}
       />
     </div>

@@ -1,3 +1,4 @@
+import { OpenGraphType } from "next/dist/lib/metadata/types/opengraph-types";
 import { Category } from "./category";
 
 export interface Country {
@@ -96,7 +97,7 @@ interface SEOSchema {
 interface SEO {
   descriptionHead: string;
   og_image: string[];
-  og_type: string;
+  og_type: OpenGraphType;
   og_url: string;
   titleHead: string;
   seoSchema: SEOSchema;

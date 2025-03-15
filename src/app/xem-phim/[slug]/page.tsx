@@ -1,5 +1,5 @@
 import Breadcrumb from "@/app/components/Home/Breadcrumb";
-import { getMovie, getMovies } from "@/app/services/movieService";
+import { getMovie, getMoviesByCategory } from "@/app/services/movieService";
 import { SearchParams } from "@/app/types";
 import { MovieDetailResponse, MovieResponse } from "@/app/types/movie";
 import { EyeIcon, HomeIcon } from "@heroicons/react/24/solid";
@@ -9,6 +9,28 @@ import VideoPlayer from "@/app/libs/VideoPlayer";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import MovieItem from "@/app/components/Movies/MovieItem";
+import { formatNumber } from "@/app/utils/formatNumber";
+import { Metadata } from "next";
+
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> => {
+  const { slug } = await params;
+
+  const data = await getMovie<MovieDetailResponse>(slug);
+
+  return {
+    title: data.seoOnPage.titleHead,
+    description: data.seoOnPage.descriptionHead,
+    openGraph: {
+      type: data.seoOnPage.og_type,
+      images: data.seoOnPage.og_image,
+      url: data.seoOnPage.og_url,
+    },
+  };
+};
 
 export default async function WatchMovie({
   params,
@@ -19,11 +41,14 @@ export default async function WatchMovie({
 }) {
   const { slug } = await params;
 
-  const [data, episode, youMightAlsoLike] = await Promise.all([
+  const [data, episode] = await Promise.all([
     getMovie<MovieDetailResponse>(slug),
     (await searchParams).episode,
-    getMovies<MovieResponse>("phim-moi-cap-nhat"),
   ]);
+
+  const youMightAlsoLikeData = await getMoviesByCategory<MovieResponse>(
+    data.item.category[0].slug
+  );
 
   if (!data || data.item.episode_current === "Trailer") {
     return notFound();
@@ -62,7 +87,11 @@ export default async function WatchMovie({
               </Breadcrumb.Item>
             );
           })}
-          <Breadcrumb.Item active={true}>{episodeData.name}</Breadcrumb.Item>
+          <Breadcrumb.Item active={true}>
+            {data.item.episode_total !== "1"
+              ? `Tập ${episodeData.name}`
+              : episodeData.name}
+          </Breadcrumb.Item>
         </Breadcrumb>
       </div>
       <div className="mt-4">
@@ -75,19 +104,22 @@ export default async function WatchMovie({
           <span className="bg-red-500 py-2 px-3 text-white rounded-lg">
             {data.item.episodes[0].server_name}
           </span>
-          <div className="flex space-x-2 items-center">
+          <div
+            className="flex space-x-2 items-center"
+            title={data.item.view.toString()}
+          >
             <EyeIcon className="size-5" />
-            <span>{data.item.view}</span>
+            <span>{formatNumber(data.item.view)}</span>
           </div>
         </div>
       </div>
 
       <div className="mt-4 bg-gray-100 dark:bg-slate-800 rounded-xl p-4">
-        <div className="grid grid-cols-3 sm:grid-cols-6 md:grid-cols-9 lg:grid-cols-12 xl:grid-cols-15 gap-3">
-          {data.item.episodes[0].server_data.map((data, _i, array) => (
+        <div className="grid grid-cols-3 sm:grid-cols-6 md:grid-cols-9 lg:grid-cols-12 xl:grid-cols-15 gap-3 max-h-52 overflow-y-auto">
+          {data.item.episodes[0].server_data.map((data, i, array) => (
             <Link
               href={`/xem-phim/${slug}?episode=${data.slug}`}
-              key={data.slug}
+              key={i}
               type="button"
               className={cn(
                 "text-center overflow-hidden overflow-ellipsis whitespace-nowrap p-1 rounded-lg shadow-md bg-gray-400 text-gray-50 hover:bg-violet-500 dark:bg-slate-600 dark:hover:bg-violet-600",
@@ -113,7 +145,7 @@ export default async function WatchMovie({
 
           <div className="flex-[0_0_80%] pl-4">
             <h1 className="text-xl font-bold text-violet-500">
-              {data.item.name}
+              {data.item.name} - Tập {episodeData.name}
             </h1>
             <h2 className="italic text-sky-500">{data.item.origin_name}</h2>
 
@@ -215,7 +247,7 @@ export default async function WatchMovie({
           Có Thể Bạn Cũng Thích
         </h1>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 py-5">
-          {youMightAlsoLike.items.map((movie) => (
+          {youMightAlsoLikeData.items.map((movie) => (
             <div key={movie._id}>
               <MovieItem movie={movie} />
             </div>

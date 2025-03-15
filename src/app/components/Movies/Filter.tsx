@@ -2,9 +2,10 @@
 import useRootContext from "@/app/hooks/useRootContext";
 import { ChevronDoubleDownIcon } from "@heroicons/react/24/solid";
 import { useParams, usePathname } from "next/navigation";
-import React, { FormEvent } from "react";
+import React, { FormEvent, useState } from "react";
 import queryString from "query-string";
 import { useRouter } from "@bprogress/next/app";
+import clsx from "clsx";
 
 const sortFields = [
   { value: "_id", label: "Thời gian đăng" },
@@ -52,6 +53,7 @@ export default function Filter({
   defaultSortField: string;
 }) {
   const { nationals, categories } = useRootContext();
+  const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
   const params = useParams<{ slug: string }>();
@@ -77,11 +79,16 @@ export default function Filter({
       <form onSubmit={handleFilter} className="lg:flex gap-2 items-center">
         <div className="p-2 flex justify-between">
           <span className="text-slate-700 dark:text-white">Lọc Phim</span>
-          <div className="block lg:hidden cursor-pointer">
+          <div
+            className="block lg:hidden cursor-pointer"
+            onClick={() => setIsOpen(!isOpen)}
+          >
             <ChevronDoubleDownIcon className="h-6 w-6" />
           </div>
         </div>
-        <div className="hidden lg:flex gap-2 items-center">
+        <div
+          className={clsx("lg:flex gap-2 items-center", !isOpen && "hidden")}
+        >
           <div className="p-2">
             <select
               name="sort_field"

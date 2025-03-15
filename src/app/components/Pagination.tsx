@@ -33,7 +33,7 @@ export default function Pagination({
   const start = Math.max(0, page - siblings);
   const end = Math.min(totalPages, start + pageRange);
 
-  if (page <= limit) {
+  if (totalPages <= 1) {
     return null;
   }
 

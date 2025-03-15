@@ -31,6 +31,21 @@ export const getMoviesByCategory = async <T>(
   return data.data as T;
 };
 
+export const getMoviesByCountry = async <T>(
+  country: string,
+  filter?: Partial<Filter>
+): Promise<T> => {
+  const query = queryString.stringify(filter || {}, {
+    skipEmptyString: true,
+  });
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API}/quoc-gia/${country}?${query}`
+  );
+  const data = await response.json();
+  return data.data as T;
+};
+
 export const searchMovies = async <T>(
   filter?: Partial<Filter & { keyword: string }>
 ): Promise<T> => {

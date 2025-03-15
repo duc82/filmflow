@@ -6,6 +6,43 @@ import { searchMovies } from "@/app/services/movieService";
 import { SearchParams } from "@/app/types";
 import { MovieResponse } from "@/app/types/movie";
 import { HomeIcon } from "@heroicons/react/24/solid";
+import { Metadata } from "next";
+
+export const generateMetadata = async ({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}): Promise<Metadata> => {
+  const keyword = (await searchParams).keyword || "";
+  const sort_field = (await searchParams).sort_field || "modified.time";
+  const sort_type = (await searchParams).sort_type || "desc";
+  const category = (await searchParams).category;
+  const country = (await searchParams).country;
+  const year = (await searchParams).year;
+  const page = (await searchParams).page;
+
+  const data = await searchMovies<MovieResponse>({
+    keyword,
+    sort_field,
+    sort_type,
+    category,
+    page,
+    country,
+    year,
+  });
+
+  console.log(data);
+
+  return {
+    title: data.seoOnPage.titleHead,
+    description: data.seoOnPage.descriptionHead,
+    openGraph: {
+      type: data.seoOnPage.og_type,
+      images: data.seoOnPage.og_image,
+      url: data.seoOnPage.og_url,
+    },
+  };
+};
 
 export default async function Search({
   searchParams,
