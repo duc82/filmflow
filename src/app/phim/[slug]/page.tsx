@@ -1,4 +1,4 @@
-import Breadcrumb from "@/app/components/Home/Breadcrumb";
+import Breadcrumb from "@/app/components/Breadcrumb";
 import { getIMDB } from "@/app/services/imdbService";
 import { getMovie, getMovies } from "@/app/services/movieService";
 import { MovieDetailResponse, MovieResponse } from "@/app/types/movie";
@@ -41,7 +41,7 @@ export default async function MovieDetail({
 
   const [data, newMovie] = await Promise.all([
     getMovie<MovieDetailResponse>(slug),
-    getMovies<MovieResponse>("phim-moi"),
+    getMovies<MovieResponse>("phim-moi-cap-nhat"),
   ]);
 
   let rating: number | string = data.item.tmdb.vote_average;
@@ -52,8 +52,6 @@ export default async function MovieDetail({
   } else {
     rating = "Đang cập nhật";
   }
-
-  console.log(data);
 
   return (
     <section>

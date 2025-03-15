@@ -13,7 +13,9 @@ export default function MovieList({
   title: string;
   movies: Movie[];
 }) {
-  const [emblaRef, emblaApi] = useEmblaCarousel();
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: "start",
+  });
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();

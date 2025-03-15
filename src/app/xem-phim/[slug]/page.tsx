@@ -1,4 +1,4 @@
-import Breadcrumb from "@/app/components/Home/Breadcrumb";
+import Breadcrumb from "@/app/components/Breadcrumb";
 import { getMovie, getMoviesByCategory } from "@/app/services/movieService";
 import { SearchParams } from "@/app/types";
 import { MovieDetailResponse, MovieResponse } from "@/app/types/movie";
@@ -59,8 +59,6 @@ export default async function WatchMovie({
       (server) => server.slug === episode
     ) || data.item.episodes[0].server_data[0];
 
-  console.log(data);
-
   return (
     <section>
       <div className="flex items-center p-4 border-b border-slate-900/10 dark:border-slate-50/[0.06]">
@@ -98,7 +96,6 @@ export default async function WatchMovie({
         <VideoPlayer
           src={episodeData.link_m3u8}
           poster={`${process.env.NEXT_PUBLIC_CDN_IMAGE}/uploads/movies/${data.item.poster_url}`}
-          wrapperClassName="rounded-t-xl overflow-hidden"
         />
         <div className="bg-gray-100 dark:bg-slate-800 rounded-b-xl p-4 flex justify-between items-center">
           <span className="bg-red-500 py-2 px-3 text-white rounded-lg">
@@ -132,7 +129,7 @@ export default async function WatchMovie({
           ))}
         </div>
         <div className="mt-8 flex">
-          <div className="flex-[0_0_20%] pr-4">
+          <div className="flex-[0_0_30%] md:flex-[0_0_20%] pr-2 md:pr-4">
             <Image
               src={`${process.env.NEXT_PUBLIC_CDN_IMAGE}/uploads/movies/${data.item.thumb_url}`}
               alt={data.item.name}
@@ -143,7 +140,7 @@ export default async function WatchMovie({
             />
           </div>
 
-          <div className="flex-[0_0_80%] pl-4">
+          <div className="flex-[0_0_70%] md:flex-[0_0_80%] pl-2 md:pl-4">
             <h1 className="text-xl font-bold text-violet-500">
               {data.item.name} - Tập {episodeData.name}
             </h1>
@@ -156,7 +153,7 @@ export default async function WatchMovie({
               }}
             ></div>
 
-            <div className="mt-4 grid grid-cols-2 gap-4">
+            <div className="mt-4 grid grid-cols-2 gap-2 md:gap-4">
               <div className="space-y-2">
                 <h3 className="text-gray-500 dark:text-gray-200 font-bold">
                   Trạng Thái:{" "}
@@ -246,7 +243,7 @@ export default async function WatchMovie({
         <h1 className="font-semibold mb-4 text-2xl lg:text-3xl text-slate-700 dark:text-white">
           Có Thể Bạn Cũng Thích
         </h1>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 py-5">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 lg:gap-8 py-5">
           {youMightAlsoLikeData.items.map((movie) => (
             <div key={movie._id}>
               <MovieItem movie={movie} />

@@ -1,4 +1,4 @@
-import Breadcrumb from "@/app/components/Home/Breadcrumb";
+import Breadcrumb from "@/app/components/Breadcrumb";
 import Filter from "@/app/components/Movies/Filter";
 import MovieItem from "@/app/components/Movies/MovieItem";
 import Pagination from "@/app/components/Pagination";
@@ -97,7 +97,7 @@ export default async function Category({
         </h1>
         <Filter defaultSortField={sort_field} />
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 py-5">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 lg:gap-8 py-5">
           {data.items.map((movie) => (
             <div key={movie._id}>
               <MovieItem movie={movie} />
