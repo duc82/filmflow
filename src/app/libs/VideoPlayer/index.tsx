@@ -27,7 +27,7 @@ export default function VideoPlayer({
         ],
         poster,
         plugins: {
-          hotkeys: { volumnStep: 0.1, seekStep: 5 },
+          hotkeys: { volumnStep: 0.1, seekStep: 5, enableVolumeScroll: false },
         },
       }}
     />

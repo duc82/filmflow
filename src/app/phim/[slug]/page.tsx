@@ -1,4 +1,5 @@
 import Breadcrumb from "@/app/components/Breadcrumb";
+import DownloadButton from "@/app/components/Movies/DownloadButton";
 import { getIMDB } from "@/app/services/imdbService";
 import { getMovie, getMovies } from "@/app/services/movieService";
 import { MovieDetailResponse, MovieResponse } from "@/app/types/movie";
@@ -100,12 +101,7 @@ export default async function MovieDetail({
 
                 {data.item.episode_current !== "Trailer" && (
                   <>
-                    <button
-                      type="button"
-                      className="cursor-pointer hover:bg-opacity-80 bg-green-500 text-gray-50 dark:text-gray-50 inline-block px-1 py-1 rounded"
-                    >
-                      Tải Phim
-                    </button>
+                    <DownloadButton />
                     <Link
                       href={`/xem-phim/${slug}`}
                       className="cursor-pointer hover:bg-opacity-80 bg-red-500 text-gray-50 dark:text-gray-50 inline-block px-1 py-1 rounded"
