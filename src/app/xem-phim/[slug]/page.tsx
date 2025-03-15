@@ -11,6 +11,8 @@ import Image from "next/image";
 import MovieItem from "@/app/components/Movies/MovieItem";
 import { formatNumber } from "@/app/utils/formatNumber";
 import { Metadata } from "next";
+import MediaThemeYt from "player.style/yt/react";
+import VideojsVideo from "videojs-video-element/react";
 
 export const generateMetadata = async ({
   params,
@@ -93,10 +95,22 @@ export default async function WatchMovie({
         </Breadcrumb>
       </div>
       <div className="mt-4">
-        <VideoPlayer
-          src={episodeData.link_m3u8}
-          poster={`${process.env.NEXT_PUBLIC_CDN_IMAGE}/uploads/movies/${data.item.poster_url}`}
-        />
+        <div className="rounded-t-xl overflow-hidden">
+          <VideoPlayer
+            src={episodeData.link_m3u8}
+            poster={`${process.env.NEXT_PUBLIC_CDN_IMAGE}/uploads/movies/${data.item.poster_url}`}
+          />
+          {/* <MediaThemeYt className="w-full h-full">
+            <VideojsVideo
+              slot="media"
+              src={episodeData.link_m3u8}
+              playsInline
+              poster={`${process.env.NEXT_PUBLIC_CDN_IMAGE}/uploads/movies/${data.item.poster_url}`}
+              suppressHydrationWarning
+            />
+          </MediaThemeYt> */}
+        </div>
+
         <div className="bg-gray-100 dark:bg-slate-800 rounded-b-xl p-4 flex justify-between items-center">
           <span className="bg-red-500 py-2 px-3 text-white rounded-lg">
             {data.item.episodes[0].server_name}
