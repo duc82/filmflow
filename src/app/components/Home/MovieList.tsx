@@ -41,10 +41,20 @@ export default function MovieList({
               ))}
             </div>
           </div>
-          <button className="embla__prev" onClick={scrollPrev}>
+          <button
+            type="button"
+            aria-label="Prev"
+            className="embla__prev"
+            onClick={scrollPrev}
+          >
             <ChevronLeftIcon className="size-5" />
           </button>
-          <button className="embla__next" onClick={scrollNext}>
+          <button
+            type="button"
+            aria-label="Next"
+            className="embla__next"
+            onClick={scrollNext}
+          >
             <ChevronRightIcon className="size-5" />
           </button>
         </div>

@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="text-sm leading-6 mt-10 p-2 xl:p-0">
       <section>
-        <div className="pt-2 pb-20 text-slate-500 border-t border-slate-200 dark:border-slate-200/5">
+        <div className="pt-2 pb-20 text-slate-700 dark:text-slate-400 border-t border-slate-200 dark:border-slate-200/5">
           <p className="block">
             Tất cả nội dung của trang web này được thu thập từ các trang web
             video chính thống trên Internet, và không cung cấp phát trực tuyến
@@ -17,7 +17,7 @@ export default function Footer() {
               <p>Copyright © {new Date().getFullYear()} FilmFlow</p>
               <p className="sm:ml-4 sm:pl-4 sm:border-l sm:border-slate-200 dark:sm:border-slate-200/5">
                 <Link
-                  className="hover:text-slate-900 dark:hover:text-slate-400"
+                  className="hover:text-slate-900 dark:hover:text-slate-300"
                   href="/gioi-thieu"
                 >
                   Giới Thiệu
@@ -25,7 +25,7 @@ export default function Footer() {
               </p>
               <p className="sm:ml-4 sm:pl-4 sm:border-l sm:border-slate-200 dark:sm:border-slate-200/5">
                 <Link
-                  className="hover:text-slate-900 dark:hover:text-slate-400"
+                  className="hover:text-slate-900 dark:hover:text-slate-300"
                   href="/khieu-nai-ban-quyen"
                 >
                   Khiếu nại bản quyền
@@ -33,7 +33,7 @@ export default function Footer() {
               </p>
               <p className="sm:ml-4 sm:pl-4 sm:border-l sm:border-slate-200 dark:sm:border-slate-200/5">
                 <Link
-                  className="hover:text-slate-900 dark:hover:text-slate-400"
+                  className="hover:text-slate-900 dark:hover:text-slate-300"
                   title="Dành cho nhà phát triển"
                   href="/api-document"
                 >

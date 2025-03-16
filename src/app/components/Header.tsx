@@ -116,6 +116,7 @@ export default function Header({
                   <Menu as="div" className="relative">
                     <MenuButton
                       as="button"
+                      aria-label="Thể Loại"
                       className="flex items-center hover:text-sky-500 dark:hover:text-sky-400"
                     >
                       Thể Loại
@@ -141,6 +142,7 @@ export default function Header({
                   <Menu as="div" className="relative">
                     <MenuButton
                       as="button"
+                      aria-label="Quốc Gia"
                       className="flex items-center hover:text-sky-500 dark:hover:text-sky-400"
                     >
                       Quốc Gia
@@ -210,6 +212,7 @@ export default function Header({
             type="button"
             className="ml-auto text-slate-500 w-8 h-8 -my-1 flex items-center justify-center hover:text-slate-600 xl:hidden dark:text-slate-400 dark:hover:text-slate-300"
             onClick={() => setIsOpenSearch((prev) => !prev)}
+            aria-label="Tìm kiếm phim"
           >
             {isOpenSearch ? (
               <XMarkIcon className="size-6" />
@@ -223,6 +226,7 @@ export default function Header({
             onClick={() => {
               setTheme((theme) => (theme === "dark" ? "light" : "dark"));
             }}
+            aria-label="Chuyển đổi chủ đề"
             className="ml-2 text-slate-500 w-8 h-8 -my-1 flex items-center justify-center hover:text-slate-600 xl:hidden dark:text-slate-400 dark:hover:text-slate-300"
           >
             <SunIcon className="block dark:hidden size-6" />
@@ -232,6 +236,7 @@ export default function Header({
           <div className="ml-2 -my-1 xl:hidden">
             <button
               onClick={handleOpenNavbar}
+              aria-label="Menu"
               className="text-slate-500 w-8 h-8 flex items-center justify-center hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
             >
               <Bars3Icon className="w-6 h-6" />
