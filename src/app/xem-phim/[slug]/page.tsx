@@ -5,14 +5,12 @@ import { MovieDetailResponse, MovieResponse } from "@/app/types/movie";
 import { EyeIcon, HomeIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { cn } from "@/app/utils/cn";
-import VideoPlayer from "@/app/libs/VideoPlayer";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import MovieItem from "@/app/components/Movies/MovieItem";
 import { formatNumber } from "@/app/utils/formatNumber";
 import { Metadata } from "next";
-import MediaThemeYt from "player.style/yt/react";
-import VideojsVideo from "videojs-video-element/react";
+import ArtPlayer from "@/app/libs/ArtPlayer";
 
 export const generateMetadata = async ({
   params,
@@ -95,20 +93,22 @@ export default async function WatchMovie({
         </Breadcrumb>
       </div>
       <div className="mt-4">
-        <div className="rounded-t-xl overflow-hidden">
-          <VideoPlayer
-            src={episodeData.link_m3u8}
-            poster={`${process.env.NEXT_PUBLIC_CDN_IMAGE}/uploads/movies/${data.item.poster_url}`}
+        <div className="aspect-video rounded-t-xl overflow-hidden">
+          <ArtPlayer
+            option={{
+              url: episodeData.link_m3u8,
+              poster: `${process.env.NEXT_PUBLIC_CDN_IMAGE}/uploads/movies/${data.item.poster_url}`,
+              fullscreen: true,
+              pip: true,
+              setting: true,
+              playbackRate: true,
+              fastForward: true,
+              autoOrientation: false,
+              flip: true,
+              lang: "en",
+              theme: "#0ea5e9",
+            }}
           />
-          {/* <MediaThemeYt className="w-full h-full">
-            <VideojsVideo
-              slot="media"
-              src={episodeData.link_m3u8}
-              playsInline
-              poster={`${process.env.NEXT_PUBLIC_CDN_IMAGE}/uploads/movies/${data.item.poster_url}`}
-              suppressHydrationWarning
-            />
-          </MediaThemeYt> */}
         </div>
 
         <div className="bg-gray-100 dark:bg-slate-800 rounded-b-xl p-4 flex justify-between items-center">

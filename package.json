@@ -13,6 +13,8 @@
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
     "@tailwindcss/forms": "^0.5.10",
+    "artplayer": "^5.2.2",
+    "artplayer-plugin-hls-control": "^1.0.1",
     "clsx": "^2.1.1",
     "embla-carousel": "^8.5.2",
     "embla-carousel-auto-height": "^8.5.2",
@@ -21,14 +23,10 @@
     "next": "15.1.7",
     "next-nprogress-bar": "^2.4.7",
     "next-themes": "^0.4.4",
-    "player.style": "^0.1.6",
     "query-string": "^9.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "tailwind-merge": "^3.0.2",
-    "video.js": "^8.22.0",
-    "videojs-hotkeys": "^0.2.30",
-    "videojs-video-element": "^1.4.1"
+    "tailwind-merge": "^3.0.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
