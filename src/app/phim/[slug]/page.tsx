@@ -54,9 +54,11 @@ export default async function MovieDetail({
     rating = "Đang cập nhật";
   }
 
+  console.log(data);
+
   return (
     <section>
-      <div className="flex items-center p-4 border-b border-slate-900/10 dark:border-slate-50/[0.06]">
+      <div className="flex items-center py-4 border-b border-slate-900/10 dark:border-slate-50/[0.06]">
         <button
           type="button"
           className="text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
@@ -99,7 +101,7 @@ export default async function MovieDetail({
                   Trailer
                 </Link>
 
-                {data.item.episode_current !== "Trailer" && (
+                {data.item.episodes[0].server_data[0].link_m3u8 && (
                   <>
                     <DownloadButton />
                     <Link
@@ -248,7 +250,7 @@ export default async function MovieDetail({
                 <ChevronUpIcon className="size-5 fill-sky-500 group-data-[open]:rotate-180" />
               </DisclosureButton>
               <DisclosurePanel className="px-4 pb-2 text-sm text-gray-500 dark:text-gray-200">
-                {data.item.episode_current !== "Trailer" && (
+                {data.item.episodes[0].server_data[0].link_m3u8 && (
                   <>
                     <div className="mb-2 uppercase font-bold">
                       Server:{" "}
@@ -273,7 +275,7 @@ export default async function MovieDetail({
                   </>
                 )}
 
-                {data.item.episode_current === "Trailer" &&
+                {!data.item.episodes[0].server_data[0].link_m3u8 &&
                   "Link phim đang được cập nhật"}
               </DisclosurePanel>
             </Disclosure>

@@ -69,7 +69,7 @@ export default async function Category({
 
   return (
     <section>
-      <div className="flex items-center p-4 border-b border-slate-900/10 dark:border-slate-50/[0.06]">
+      <div className="flex items-center py-4 border-b border-slate-900/10 dark:border-slate-50/[0.06]">
         <button
           type="button"
           className="text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"

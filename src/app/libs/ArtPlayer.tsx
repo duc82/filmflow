@@ -36,10 +36,11 @@ export default function ArtPlayer({
   getInstance,
   ...rest
 }: ArtPlayerProps) {
-  const artRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const artRef = useRef<Artplayer>(null);
 
   useEffect(() => {
-    const container = artRef.current;
+    const container = containerRef.current;
     if (!container) return;
     const art = new Artplayer({
       ...option,
@@ -144,6 +145,8 @@ export default function ArtPlayer({
       });
     }
 
+    artRef.current = art;
+
     if (getInstance && typeof getInstance === "function") {
       getInstance(art);
     }
@@ -155,5 +158,24 @@ export default function ArtPlayer({
     };
   }, [getInstance, option]);
 
-  return <div ref={artRef} {...rest} className="w-full h-full"></div>;
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const art = artRef.current;
+      if (!art) return;
+      if (e.key === "m" || e.key === "M") {
+        art.muted = !art.muted;
+      }
+      if (e.key === "f" || e.key === "F") {
+        art.fullscreen = !art.fullscreen;
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  return <div ref={containerRef} {...rest} className="w-full h-full"></div>;
 }

@@ -50,18 +50,18 @@ export default async function WatchMovie({
     data.item.category[0].slug
   );
 
-  if (!data || data.item.episode_current === "Trailer") {
-    return notFound();
-  }
-
   const episodeData =
     data.item.episodes[0].server_data.find(
       (server) => server.slug === episode
     ) || data.item.episodes[0].server_data[0];
 
+  if (!data || !episodeData.link_m3u8) {
+    return notFound();
+  }
+
   return (
     <section>
-      <div className="flex items-center p-4 border-b border-slate-900/10 dark:border-slate-50/[0.06]">
+      <div className="flex items-center py-4 border-b border-slate-900/10 dark:border-slate-50/[0.06]">
         <button
           type="button"
           className="text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
@@ -105,6 +105,7 @@ export default async function WatchMovie({
               fastForward: true,
               autoOrientation: false,
               flip: true,
+              hotkey: true,
               lang: "en",
               theme: "#0ea5e9",
             }}
