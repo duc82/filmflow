@@ -50,7 +50,7 @@ export default async function RootLayout({
             <Footer />
           </ThemeProvider>
         </ProgressBarProvider>
-        <GoogleAnalytics gaId="GTM-PZGWJW9T" />
+        <GoogleAnalytics gaId="G-4T9R83ZFLW" />
       </body>
     </html>
   );
