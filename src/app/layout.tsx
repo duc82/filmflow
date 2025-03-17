@@ -10,7 +10,7 @@ import Header from "./components/Header";
 import RootProvider from "./providers/RootProvider";
 import ProgressBarProvider from "./providers/ProgressBarProvider";
 import Footer from "./components/Footer";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -51,6 +51,7 @@ export default async function RootLayout({
           </ThemeProvider>
         </ProgressBarProvider>
         <GoogleAnalytics gaId="G-4T9R83ZFLW" />
+        <GoogleTagManager gtmId="GTM-PZGWJW9T" />
       </body>
     </html>
   );
