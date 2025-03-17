@@ -11,6 +11,7 @@ import RootProvider from "./providers/RootProvider";
 import ProgressBarProvider from "./providers/ProgressBarProvider";
 import Footer from "./components/Footer";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
+import { Metadata } from "next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,6 +22,10 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_CDN_IMAGE + "/uploads"),
+};
 
 export default async function RootLayout({
   children,
