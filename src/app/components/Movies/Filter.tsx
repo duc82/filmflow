@@ -1,7 +1,7 @@
 "use client";
 import useRootContext from "@/app/hooks/useRootContext";
 import { ChevronDoubleDownIcon } from "@heroicons/react/24/solid";
-import { useParams, usePathname } from "next/navigation";
+import { useParams, usePathname, useSearchParams } from "next/navigation";
 import React, { FormEvent, useState } from "react";
 import queryString from "query-string";
 import { useRouter } from "@bprogress/next/app";
@@ -56,6 +56,7 @@ export default function Filter({
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const params = useParams<{ slug: string }>();
 
   const slug = params.slug;
@@ -64,10 +65,15 @@ export default function Filter({
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    const array = formData.entries();
-    const obj = Object.fromEntries(array);
+    const obj = Object.fromEntries(formData.entries());
+    const obj2 = Object.fromEntries(searchParams.entries());
 
-    const query = queryString.stringify(obj, {
+    const newObj = {
+      ...obj,
+      ...obj2,
+    };
+
+    const query = queryString.stringify(newObj, {
       skipEmptyString: true,
     });
 
@@ -75,15 +81,15 @@ export default function Filter({
   };
 
   return (
-    <div className="w-full px-2 py-1 bg-gray-100 dark:bg-slate-800 rounded-md text-white">
+    <div className="w-full px-2 py-1 bg-gray-100 dark:bg-slate-800 rounded-md text-slate-700 dark:text-white">
       <form onSubmit={handleFilter} className="lg:flex gap-2 items-center">
         <div className="p-2 flex justify-between">
-          <span className="text-slate-700 dark:text-white">Lọc Phim</span>
+          <span>Lọc Phim</span>
           <div
             className="block lg:hidden cursor-pointer"
             onClick={() => setIsOpen(!isOpen)}
           >
-            <ChevronDoubleDownIcon className="h-6 w-6" />
+            <ChevronDoubleDownIcon className="size-6" />
           </div>
         </div>
         <div

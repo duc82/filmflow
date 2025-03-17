@@ -8,8 +8,9 @@ import { NationalReponse } from "./types/national";
 import BgDecoration from "./components/BgDecoration";
 import Header from "./components/Header";
 import RootProvider from "./providers/RootProvider";
-import ProgressBarProvider from "./providers/ProgressBar";
+import ProgressBarProvider from "./providers/ProgressBarProvider";
 import Footer from "./components/Footer";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -49,6 +50,7 @@ export default async function RootLayout({
             <Footer />
           </ThemeProvider>
         </ProgressBarProvider>
+        <GoogleAnalytics gaId="GTM-PZGWJW9T" />
       </body>
     </html>
   );

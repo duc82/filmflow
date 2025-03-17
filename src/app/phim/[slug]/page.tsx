@@ -92,7 +92,7 @@ export default async function MovieDetail({
                 sizes="(min-width: 1024px) 20vw, (min-width: 640px) 25vw, 50vw"
                 className="w-full h-auto object-cover rounded-xl"
               />
-              <div className="absolute bottom-0 space-x-2 text-center w-full bg-white dark:bg-black bg-opacity-40 dark:bg-opacity-80 py-2 m-0 rounded-t-none rounded-lg">
+              <div className="absolute bottom-0 space-x-2 text-center w-full bg-black bg-opacity-40 dark:bg-opacity-80 py-2 m-0 rounded-t-none rounded-lg">
                 <Link
                   href={data.item.trailer_url}
                   target="_blank"
@@ -201,7 +201,8 @@ export default async function MovieDetail({
                         Diễn Viên
                       </td>
                       <td className="py-1 pl-2 leading-5 text-indigo-600 whitespace-normal dark:text-indigo-300">
-                        {data.item.actor.join(", ")}
+                        {data.item.actor[0] && data.item.actor.join(", ")}
+                        {!data.item.actor[0] && "Đang cập nhật"}
                       </td>
                     </tr>
 

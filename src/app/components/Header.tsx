@@ -301,7 +301,7 @@ export default function Header({
               <Link
                 href="/danh-sach/phim-bo"
                 onClick={handleCloseNavbar}
-                className="hover:text-sky-500 dark:hover:text-sky-400"
+                className="block hover:text-sky-500 dark:hover:text-sky-400"
               >
                 Phim Bộ
               </Link>
@@ -310,7 +310,7 @@ export default function Header({
               <Link
                 href="/danh-sach/phim-le"
                 onClick={handleCloseNavbar}
-                className="hover:text-sky-500 dark:hover:text-sky-400"
+                className="block hover:text-sky-500 dark:hover:text-sky-400"
               >
                 Phim Lẻ
               </Link>
@@ -319,7 +319,7 @@ export default function Header({
               <Link
                 href="/danh-sach/tv-shows"
                 onClick={handleCloseNavbar}
-                className="hover:text-sky-500 dark:hover:text-sky-400"
+                className="block hover:text-sky-500 dark:hover:text-sky-400"
               >
                 Shows
               </Link>
@@ -328,7 +328,7 @@ export default function Header({
               <Link
                 href="/danh-sach/hoat-hinh"
                 onClick={handleCloseNavbar}
-                className="hover:text-sky-500 dark:hover:text-sky-400"
+                className="block hover:text-sky-500 dark:hover:text-sky-400"
               >
                 Hoạt Hình
               </Link>
@@ -377,7 +377,7 @@ export default function Header({
               <Link
                 href="/danh-sach/phim-sap-chieu"
                 onClick={handleCloseNavbar}
-                className="hover:text-sky-500 dark:hover:text-sky-400"
+                className="block hover:text-sky-500 dark:hover:text-sky-400"
               >
                 Sắp Chiếu
               </Link>
