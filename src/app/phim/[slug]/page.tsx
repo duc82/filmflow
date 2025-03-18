@@ -54,8 +54,6 @@ export default async function MovieDetail({
     rating = "Đang cập nhật";
   }
 
-  console.log(data);
-
   return (
     <section>
       <div className="flex items-center py-4 border-b border-slate-900/10 dark:border-slate-50/[0.06]">
@@ -237,7 +235,7 @@ export default async function MovieDetail({
                 <span>Nội dung phim</span>
                 <ChevronUpIcon className="size-5 fill-sky-500 group-data-[open]:rotate-180" />
               </DisclosureButton>
-              <DisclosurePanel className="px-4 pb-2 text-sm text-gray-500 dark:text-gray-200">
+              <DisclosurePanel className="px-4 pb-2 text-sm text-gray-800 dark:text-gray-200">
                 <div
                   dangerouslySetInnerHTML={{
                     __html: data.item.content.replace(/<[^>]*>/g, ""),
@@ -259,14 +257,14 @@ export default async function MovieDetail({
                         {data.item.episodes[0].server_name}
                       </span>
                     </div>
-                    <div className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-16 gap-2">
+                    <div className="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-9 xl:grid-cols-12 gap-2">
                       {data.item.episodes[0].server_data.map(
                         (data, i, array) => (
                           <Link
                             key={i}
                             href={`/xem-phim/${slug}?episode=${data.slug}`}
                             type="button"
-                            className="text-center overflow-hidden overflow-ellipsis whitespace-nowrap px-5 py-1 rounded shadow-md bg-gray-400 text-gray-50 hover:bg-violet-500 dark:bg-slate-600 dark:hover:bg-violet-600"
+                            className="text-center overflow-hidden overflow-ellipsis whitespace-nowrap px-2 py-1 rounded-lg shadow-md bg-gray-400 text-gray-50 hover:bg-violet-500 dark:bg-slate-600 dark:hover:bg-violet-600"
                           >
                             {array.length > 1 ? `Tập ${data.name}` : data.name}
                           </Link>

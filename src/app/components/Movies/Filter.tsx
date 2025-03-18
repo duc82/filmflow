@@ -1,8 +1,8 @@
 "use client";
 import useRootContext from "@/app/hooks/useRootContext";
 import { ChevronDoubleDownIcon } from "@heroicons/react/24/solid";
-import { useParams, usePathname, useSearchParams } from "next/navigation";
-import React, { FormEvent, useState } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import { FormEvent, useState } from "react";
 import queryString from "query-string";
 import { useRouter } from "@bprogress/next/app";
 import clsx from "clsx";
@@ -47,25 +47,37 @@ const years = Array.from(
   (_, i) => nextYear - i
 );
 
+interface FilterProps {
+  defaultSortField?: string;
+  defaultType?: string;
+  defaultCategory?: string;
+  defaultCountry?: string;
+  type: "type" | "category" | "country" | "search";
+}
+
 export default function Filter({
-  defaultSortField,
-}: {
-  defaultSortField: string;
-}) {
+  defaultSortField = "modified.time",
+  defaultType,
+  defaultCategory,
+  defaultCountry,
+  type,
+}: FilterProps) {
   const { nationals, categories } = useRootContext();
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const params = useParams<{ slug: string }>();
-
-  const slug = params.slug;
 
   const handleFilter = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
     const obj = Object.fromEntries(formData.entries());
+    const slug = obj[type];
+
+    if (type !== "search") {
+      delete obj[type];
+    }
     const obj2 = Object.fromEntries(searchParams.entries());
 
     const newObj = {
@@ -77,7 +89,13 @@ export default function Filter({
       skipEmptyString: true,
     });
 
-    router.replace(`${pathname}?${query}`);
+    if (type === "search") {
+      router.replace(`${pathname}?${query}`);
+      return;
+    }
+
+    const pathnameArr = pathname.split("/");
+    router.push(`/${pathnameArr[1]}/${slug}?${query}`);
   };
 
   return (
@@ -113,7 +131,7 @@ export default function Filter({
             <select
               name="type"
               id="filter-eptype"
-              defaultValue={slug}
+              defaultValue={defaultType}
               className="bg-gray-200 dark:bg-slate-700 text-gray-600 dark:text-white p-2 rounded-md outline-none"
             >
               {types.map((type) => (
@@ -127,6 +145,7 @@ export default function Filter({
             <select
               name="category"
               id="filter-category"
+              defaultValue={defaultCategory}
               className="bg-gray-200 dark:bg-slate-700 text-gray-600 dark:text-white p-2 rounded-md outline-none"
             >
               <option value="" className="py-2">
@@ -147,6 +166,7 @@ export default function Filter({
             <select
               name="country"
               id="filter-country"
+              defaultValue={defaultCountry}
               className="bg-gray-200 dark:bg-slate-700 text-gray-600 dark:text-white p-2 rounded-md outline-none"
             >
               <option value="" className="py-2">

@@ -74,6 +74,7 @@ export default function Header({
                 aria-label="Tìm kiếm phim"
                 placeholder="Tìm kiếm phim..."
                 name="search"
+                autoComplete="off"
               />
             </form>
           </div>
@@ -264,6 +265,7 @@ export default function Header({
               aria-label="Tìm kiếm phim"
               placeholder="Tìm kiếm phim..."
               name="search"
+              autoComplete="off"
             />
           </form>
         </div>

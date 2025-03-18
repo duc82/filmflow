@@ -7,6 +7,7 @@ import { SearchParams } from "@/app/types";
 import { MovieResponse } from "@/app/types/movie";
 import { HomeIcon } from "@heroicons/react/24/solid";
 import { Metadata } from "next";
+import queryString from "query-string";
 
 export const generateMetadata = async ({
   params,
@@ -67,6 +68,18 @@ export default async function MovieList({
     year,
   });
 
+  const query = queryString.stringify(
+    {
+      category,
+      country,
+      year,
+      page,
+    },
+    {
+      skipEmptyString: true,
+    }
+  );
+
   return (
     <section>
       <div className="flex items-center py-4 border-b border-slate-900/10 dark:border-slate-50/[0.06]">
@@ -82,7 +95,7 @@ export default async function MovieList({
             return (
               <Breadcrumb.Item
                 key={breadcrumb.name}
-                href={breadcrumb.slug}
+                href={`${breadcrumb.slug}?${query}`}
                 active={breadcrumb.isCurrent}
               >
                 {breadcrumb.name}
@@ -95,7 +108,7 @@ export default async function MovieList({
         <h1 className="mb-4 text-2xl uppercase font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#7367F0] to-[#cecbf0]">
           {data.titlePage}
         </h1>
-        <Filter defaultSortField={sort_field} />
+        <Filter defaultSortField={sort_field} defaultType={slug} type="type" />
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 lg:gap-8 py-5">
           {data.items.map((movie) => (

@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import Link from "next/link";
 
 function Breadcrumb({ children }: { children: React.ReactNode }) {
@@ -20,31 +19,38 @@ function BreadcrumbItem({
 }) {
   return (
     <li className="flex items-center">
-      <Link
-        href={href}
-        className={clsx(
-          active
-            ? "text-slate-900 dark:text-slate-200 font-semibold"
-            : "text-slate-500 hover:text-sky-500 dark:text-slate-400 dark:hover:text-slate-300"
-        )}
-      >
-        {children}
-      </Link>
-      {!active && (
-        <svg
-          width="3"
-          height="6"
-          aria-hidden="true"
-          className="mx-3 overflow-visible text-slate-400"
+      {active && (
+        <button
+          type="button"
+          className="text-slate-900 dark:text-slate-200 font-semibold"
         >
-          <path
-            d="M0 0L3 3L0 6"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          ></path>
-        </svg>
+          {children}
+        </button>
+      )}
+
+      {!active && (
+        <>
+          <Link
+            href={href}
+            className="text-slate-500 hover:text-sky-500 dark:text-slate-400 dark:hover:text-slate-300"
+          >
+            {children}
+          </Link>
+          <svg
+            width="3"
+            height="6"
+            aria-hidden="true"
+            className="mx-3 overflow-visible text-slate-400"
+          >
+            <path
+              d="M0 0L3 3L0 6"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+            ></path>
+          </svg>
+        </>
       )}
     </li>
   );

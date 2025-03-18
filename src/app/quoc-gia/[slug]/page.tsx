@@ -95,7 +95,11 @@ export default async function MovieList({
         <h1 className="mb-4 text-2xl uppercase font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#7367F0] to-[#cecbf0]">
           {data.titlePage}
         </h1>
-        <Filter defaultSortField={sort_field} />
+        <Filter
+          defaultSortField={sort_field}
+          defaultCountry={slug}
+          type="country"
+        />
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 lg:gap-8 py-5">
           {data.items.map((movie) => (
