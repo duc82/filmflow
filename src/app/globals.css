@@ -66,3 +66,24 @@
     @apply cursor-pointer absolute flex items-center justify-center rounded-full font-bold bg-sky-400 text-white hover:bg-sky-500 transition-colors duration-300 z-10 w-9 h-9;
   }
 }
+
+.art-icon-play.hint--top::after,
+.art-icon-pause.hint--top::after {
+  transform: translate(0, 0);
+  left: 0 !important;
+}
+
+.art-icon-play.hint--top:hover::after,
+.art-icon-pause.hint--top:hover::after {
+  transform: translateX(0) translateY(-8px);
+}
+
+.art-control-fullscreen.hint--top::after {
+  transform: translate(0, 0);
+  right: 0;
+  left: auto !important;
+}
+
+.art-control-fullscreen.hint--top:hover::after {
+  transform: translateX(0) translateY(-8px);
+}

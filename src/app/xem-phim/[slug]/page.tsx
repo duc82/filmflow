@@ -105,9 +105,11 @@ export default async function WatchMovie({
               fastForward: true,
               autoOrientation: false,
               flip: true,
+              lock: true,
               hotkey: true,
-              lang: "en",
+              lang: "vi",
               theme: "#0ea5e9",
+              autoplay: false,
             }}
           />
         </div>

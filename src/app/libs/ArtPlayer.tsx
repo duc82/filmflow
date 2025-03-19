@@ -50,7 +50,7 @@ export default function ArtPlayer({
         {
           index: 1,
           position: "right",
-          tooltip: "-10s",
+          tooltip: "-10 giây",
           html: `<button type="button" class="text-white hidden md:block">
               <svg
                 width="26"
@@ -80,7 +80,7 @@ export default function ArtPlayer({
         {
           index: 2,
           position: "right",
-          tooltip: "+10s",
+          tooltip: "+10 giây",
           html: ` <button type="button" class="text-white hidden md:block">
               <svg
                 width="27"
@@ -118,21 +118,53 @@ export default function ArtPlayer({
             setting: true,
             // Get the quality name from level
             getName: (level) => (level as Level).height + "P",
-            // I18n
-            title: "Quality",
-            auto: "Auto",
+            title: "Chất lượng",
+            auto: "Tự động",
           },
           audio: {
             // Show audios in setting
             setting: true,
             // Get the audio name from track
             getName: (track) => (track as Level).name,
-            // I18n
-            title: "Audio",
-            auto: "Auto",
+            title: "Âm thanh",
+            auto: "Tự động",
           },
         }),
       ],
+      i18n: {
+        vi: {
+          Play: "Phát (k)",
+          Pause: "Tạm dừng (k)",
+          "Show Setting": "Cài đặt",
+          "Play Speed": "Tốc độ phát",
+          "Video Flip": "Xoay video",
+          "PIP Mode": "Trình phát thu nhỏ (i)",
+          "Aspect Ratio": "Tỷ lệ khung hình",
+          Mute: "Tắt tiếng (m)",
+          Volume: "Âm lượng",
+          Fullscreen: "Toàn màn hình (f)",
+          "Exit Fullscreen": "Thoát (f)",
+          "Exit PIP Mode": "Thoát (i)",
+          Normal: "Bình thường",
+          Horizontal: "Xoay ngang",
+          Vertical: "Xoay dọc",
+          Open: "Mở",
+          Close: "Đóng",
+          Default: "Mặc định",
+        },
+        tr: {},
+        id: {},
+        en: {},
+        "zh-cn": {},
+        "zh-tw": {},
+        pl: {},
+        cs: {},
+        es: {},
+        fa: {},
+        fr: {},
+        ru: {},
+        ar: {},
+      },
     });
 
     if (isAndroid) {
@@ -167,6 +199,18 @@ export default function ArtPlayer({
       }
       if (e.key === "f" || e.key === "F") {
         art.fullscreen = !art.fullscreen;
+      }
+
+      if (e.key === "i" || e.key === "I") {
+        art.pip = !art.pip;
+      }
+
+      if (e.key === "k" || e.key === "K") {
+        if (art.video.paused) {
+          art.play();
+        } else {
+          art.pause();
+        }
       }
     };
 
