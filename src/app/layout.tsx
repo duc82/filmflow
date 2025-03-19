@@ -46,7 +46,7 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ProgressBarProvider>
-          <ThemeProvider>
+          <ThemeProvider defaultTheme="dark">
             <BgDecoration />
             <Header categories={categories} nationals={nationals} />
             <RootProvider categories={categories} nationals={nationals}>
