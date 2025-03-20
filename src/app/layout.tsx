@@ -48,8 +48,8 @@ export default async function RootLayout({
         <ProgressBarProvider>
           <ThemeProvider defaultTheme="dark">
             <BgDecoration />
-            <Header categories={categories} nationals={nationals} />
             <RootProvider categories={categories} nationals={nationals}>
+              <Header />
               {children}
             </RootProvider>
             <Footer />

@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import Artplayer from "artplayer";
 import Hls from "hls.js";
 import artplayerPluginHlsControl from "artplayer-plugin-hls-control";
+import useRootContext from "../hooks/useRootContext";
 
 interface ArtPlayerProps extends React.HTMLAttributes<HTMLDivElement> {
   option: Omit<Artplayer["option"], "container">;
@@ -38,6 +39,7 @@ export default function ArtPlayer({
 }: ArtPlayerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const artRef = useRef<Artplayer>(null);
+  const { isSearchFocus } = useRootContext();
 
   useEffect(() => {
     const container = containerRef.current;
@@ -193,7 +195,8 @@ export default function ArtPlayer({
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const art = artRef.current;
-      if (!art) return;
+      if (!art || isSearchFocus) return;
+
       if (e.key === "m" || e.key === "M") {
         art.muted = !art.muted;
       }
@@ -219,7 +222,7 @@ export default function ArtPlayer({
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [isSearchFocus]);
 
   return <div ref={containerRef} {...rest} className="w-full h-full"></div>;
 }

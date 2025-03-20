@@ -10,8 +10,6 @@ import {
 } from "@headlessui/react";
 import { ChevronDownIcon, MoonIcon, SunIcon } from "@heroicons/react/16/solid";
 import { useTheme } from "next-themes";
-import { Category } from "../types/category";
-import { National } from "../types/national";
 import Link from "next/link";
 import {
   Bars3Icon,
@@ -23,14 +21,10 @@ import { cn } from "../utils/cn";
 import logo from "../assets/logo.png";
 import Image from "next/image";
 import { useRouter } from "@bprogress/next/app";
+import useRootContext from "../hooks/useRootContext";
 
-export default function Header({
-  categories,
-  nationals,
-}: {
-  categories: Category[];
-  nationals: National[];
-}) {
+export default function Header() {
+  const { categories, nationals, setIsSearchFocus } = useRootContext();
   const router = useRouter();
   const { setTheme } = useTheme();
   const [isOpenNavbar, setIsOpenNavbar] = useState(false);
@@ -75,6 +69,8 @@ export default function Header({
                 placeholder="Tìm kiếm phim..."
                 name="search"
                 autoComplete="off"
+                onFocus={() => setIsSearchFocus(true)}
+                onBlur={() => setIsSearchFocus(false)}
               />
             </form>
           </div>
