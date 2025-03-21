@@ -32,7 +32,7 @@ export default function MovieItem({ movie }: { movie: Movie }) {
           {movie.category.map((category, i) => (
             <span key={i}>
               <Link
-                href={`/danh-sach/${category.slug}`}
+                href={`/the-loai/${category.slug}`}
                 className="text-sm text-sky-500 dark:text-sky-400 hover:text-red-500 transition-colors duration-300"
               >
                 {category.name}
