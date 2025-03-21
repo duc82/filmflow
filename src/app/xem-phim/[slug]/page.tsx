@@ -164,13 +164,13 @@ export default async function WatchMovie({
             <h2 className="italic text-sky-500">{data.item.origin_name}</h2>
 
             <div
-              className="text-gray-500 dark:text-gray-200 mt-4"
+              className="text-gray-500 dark:text-gray-200 mt-4 hidden md:block"
               dangerouslySetInnerHTML={{
                 __html: data.item.content.replace(/<[^>]*>/g, ""),
               }}
             ></div>
 
-            <div className="mt-4 grid grid-cols-2 gap-2 md:gap-4">
+            <div className="mt-4 hidden md:grid grid-cols-2 gap-2 md:gap-4">
               <div className="space-y-2">
                 <h3 className="text-gray-500 dark:text-gray-200 font-bold">
                   Trạng Thái:{" "}
@@ -227,7 +227,7 @@ export default async function WatchMovie({
                   {data.item.category.map((category, i) => (
                     <span key={i}>
                       <Link
-                        href={`/danh-sach/${category.slug}`}
+                        href={`/the-loai/${category.slug}`}
                         className="text-sky-500 dark:text-sky-400 hover:text-red-500 transition-colors duration-300"
                       >
                         {category.name}
@@ -241,7 +241,7 @@ export default async function WatchMovie({
                   {data.item.country.map((country, i) => (
                     <span key={i}>
                       <Link
-                        href={`/danh-sach/${country.slug}`}
+                        href={`/quoc-gia/${country.slug}`}
                         className="text-sky-500 dark:text-sky-400 hover:text-red-500 transition-colors duration-300"
                       >
                         {country.name}
@@ -252,6 +252,95 @@ export default async function WatchMovie({
                 </h3>
               </div>
             </div>
+          </div>
+        </div>
+        <div
+          className="text-gray-500 dark:text-gray-200 mt-4 md:hidden"
+          dangerouslySetInnerHTML={{
+            __html: data.item.content.replace(/<[^>]*>/g, ""),
+          }}
+        ></div>
+
+        <div className="mt-4 grid md:hidden grid-cols-2 gap-2 md:gap-4">
+          <div className="space-y-2">
+            <h3 className="text-gray-500 dark:text-gray-200 font-bold">
+              Trạng Thái:{" "}
+              <span className="text-sky-500 dark:text-sky-400">
+                {data.item.episode_current}
+              </span>
+            </h3>
+            <h3 className="text-gray-500 dark:text-gray-200 font-bold">
+              Thời Lượng:{" "}
+              <span className="text-sky-500 dark:text-sky-400">
+                {data.item.time}
+              </span>
+            </h3>
+            <h3 className="text-gray-500 dark:text-gray-200 font-bold">
+              Năm Phát Hành:{" "}
+              <span className="text-sky-500 dark:text-sky-400">
+                {data.item.year}
+              </span>
+            </h3>
+            <h3 className="text-gray-500 dark:text-gray-200 font-bold">
+              Chất Lượng:{" "}
+              <span className="text-sky-500 dark:text-sky-400">
+                {data.item.quality}
+              </span>
+            </h3>
+            <h3 className="text-gray-500 dark:text-gray-200 font-bold">
+              Ngôn Ngữ:{" "}
+              <span className="text-sky-500 dark:text-sky-400">
+                {data.item.lang}
+              </span>
+            </h3>
+          </div>
+          <div className="space-y-2">
+            <h3 className="text-gray-500 dark:text-gray-200 font-bold">
+              Đạo Diễn:{" "}
+              {data.item.director.map((director, i) => (
+                <span key={i} className="text-sky-500 dark:text-sky-400">
+                  {director}
+                  {i < data.item.director.length - 1 && ", "}
+                </span>
+              ))}
+            </h3>
+            <h3 className="text-gray-500 dark:text-gray-200 font-bold">
+              Diễn Viên:{" "}
+              {data.item.actor.map((actor, i) => (
+                <span key={i} className="text-sky-500 dark:text-sky-400">
+                  {actor}
+                  {i < data.item.actor.length - 1 && ", "}
+                </span>
+              ))}
+            </h3>
+            <h3 className="text-gray-500 dark:text-gray-200 font-bold">
+              Thể loại:{" "}
+              {data.item.category.map((category, i) => (
+                <span key={i}>
+                  <Link
+                    href={`/the-loai/${category.slug}`}
+                    className="text-sky-500 dark:text-sky-400 hover:text-red-500 transition-colors duration-300"
+                  >
+                    {category.name}
+                  </Link>
+                  {i < data.item.category.length - 1 && ", "}
+                </span>
+              ))}
+            </h3>
+            <h3 className="text-gray-500 dark:text-gray-200 font-bold">
+              Quốc Gia:{" "}
+              {data.item.country.map((country, i) => (
+                <span key={i}>
+                  <Link
+                    href={`/quoc-gia/${country.slug}`}
+                    className="text-sky-500 dark:text-sky-400 hover:text-red-500 transition-colors duration-300"
+                  >
+                    {country.name}
+                  </Link>
+                  {i < data.item.country.length - 1 && ", "}
+                </span>
+              ))}
+            </h3>
           </div>
         </div>
       </div>

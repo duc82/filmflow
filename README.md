@@ -35,7 +35,11 @@ cd filmflow
 npm install
 ```
 
-3️⃣ Chạy dự án
+3️⃣ Cấu hình biến môi trường
+
+Đổi tên file `.env.example` thành `.env`
+
+4️⃣ Chạy dự án
 
 ```bash
 npm run dev

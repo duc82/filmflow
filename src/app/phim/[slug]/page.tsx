@@ -8,7 +8,11 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
-import { ChevronUpIcon, HomeIcon } from "@heroicons/react/24/solid";
+import {
+  ChevronUpIcon,
+  HomeIcon,
+  PlayCircleIcon,
+} from "@heroicons/react/24/solid";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -306,27 +310,50 @@ export default async function MovieDetail({
           <hr className="my-2 border-slate-200 dark:border-slate-400/20" />
           <ul>
             {newMovie.items.slice(0, 10).map((movie) => (
-              <li key={movie._id}>
-                <Link href={`/phim/${movie.slug}`}>
-                  <div className="flex my-4">
+              <li key={movie._id} className="group">
+                <div className="flex my-4">
+                  <Link
+                    href={`/phim/${movie.slug}`}
+                    className="block flex-[0_0_30%] relative overflow-hidden rounded-lg"
+                  >
                     <Image
                       src={`${process.env.NEXT_PUBLIC_CDN_IMAGE}/uploads/movies/${movie.thumb_url}`}
                       alt={movie.name}
                       width={0}
                       height={0}
                       sizes="(min-width: 1024px) 20vw, (min-width: 640px) 25vw, 50vw"
-                      className="w-24 object-cover rounded-lg"
+                      className="group-hover:scale-110 transition-transform duration-500 w-full object-cover"
                     />
-                    <div className="ml-4">
-                      <h2 className="font-semibold text-slate-700 dark:text-white">
-                        {movie.name}
-                      </h2>
-                      <p className="text-sm text-slate-500 dark:text-slate-400">
-                        {movie.year}
-                      </p>
+                    <div className="absolute inset-0 invisible group-hover:bg-black/25 group-hover:visible transition-all duration-500"></div>
+                    <div className="absolute top-1/2 -translate-y-1/2 left-0 w-full flex justify-center opacity-0 scale-125 group-hover:opacity-100 group-hover:scale-100 transition duration-500 will-change-transform z-10">
+                      <PlayCircleIcon className="text-sky-400 size-20" />
+                    </div>
+                  </Link>
+
+                  <div className="ml-4 flex-[0_0_70%]">
+                    <h2 className="font-semibold text-slate-700 dark:text-white hover:text-sky-400 transition-colors duration-300">
+                      <Link href={`/phim/${movie.slug}`}>
+                        {movie.name} ({movie.year})
+                      </Link>
+                    </h2>
+                    {/* <p className="text-sm text-slate-500 dark:text-slate-400">
+                      {movie.year}
+                    </p> */}
+                    <div>
+                      {movie.category.map((category, i) => (
+                        <span key={i}>
+                          <Link
+                            href={`/danh-sach/${category.slug}`}
+                            className="text-sm text-sky-500 dark:text-sky-400 hover:text-red-500 transition-colors duration-300"
+                          >
+                            {category.name}
+                          </Link>
+                          {i < movie.category.length - 1 && ", "}
+                        </span>
+                      ))}
                     </div>
                   </div>
-                </Link>
+                </div>
               </li>
             ))}
           </ul>

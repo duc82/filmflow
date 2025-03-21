@@ -51,8 +51,8 @@ export default async function RootLayout({
             <RootProvider categories={categories} nationals={nationals}>
               <Header />
               {children}
+              <Footer />
             </RootProvider>
-            <Footer />
           </ThemeProvider>
         </ProgressBarProvider>
         <GoogleAnalytics gaId="G-4T9R83ZFLW" />
