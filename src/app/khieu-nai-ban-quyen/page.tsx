@@ -1,3 +1,3 @@
 export default function page() {
-  return <section>Khiếu nại bản quyền</section>;
+  return <section className="mt-10">Khiếu nại bản quyền</section>;
 }

@@ -1,3 +1,3 @@
 export default function ApiDocument() {
-  return <section>Api Document</section>;
+  return <section className="mt-10">Api Document</section>;
 }

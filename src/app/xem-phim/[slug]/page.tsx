@@ -4,13 +4,14 @@ import { SearchParams } from "@/app/types";
 import { MovieDetailResponse, MovieResponse } from "@/app/types/movie";
 import { EyeIcon, HomeIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
-import { cn } from "@/app/utils/cn";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import MovieItem from "@/app/components/Movies/MovieItem";
 import { formatNumber } from "@/app/utils/formatNumber";
 import { Metadata } from "next";
 import ArtPlayer from "@/app/libs/ArtPlayer";
+import ListServer from "@/app/components/Movie/ListServer";
+import ListEpisode from "@/app/components/Movie/ListEpisode";
 
 export const generateMetadata = async ({
   params,
@@ -39,16 +40,15 @@ export default async function WatchMovie({
   params: Promise<{ slug: string }>;
   searchParams: SearchParams;
 }) {
-  const { slug } = await params;
+  const [{ slug }, sp] = await Promise.all([params, searchParams]);
 
-  const [data, episode] = await Promise.all([
-    getMovie<MovieDetailResponse>(slug),
-    (await searchParams).episode,
-  ]);
+  const data = await getMovie<MovieDetailResponse>(slug);
 
   const youMightAlsoLikeData = await getMoviesByCategory<MovieResponse>(
     data.item.category[0].slug
   );
+
+  const episode = sp.episode;
 
   const episodeData =
     data.item.episodes[0].server_data.find(
@@ -115,9 +115,10 @@ export default async function WatchMovie({
         </div>
 
         <div className="bg-gray-100 dark:bg-slate-800 rounded-b-xl p-4 flex justify-between items-center">
-          <span className="bg-red-500 py-2 px-3 text-white rounded-lg">
-            {data.item.episodes[0].server_name}
-          </span>
+          <div className="flex space-x-4">
+            <ListServer datas={data.item.episodes} />
+          </div>
+
           <div
             className="flex space-x-2 items-center"
             title={data.item.view.toString()}
@@ -130,20 +131,7 @@ export default async function WatchMovie({
 
       <div className="mt-4 bg-gray-100 dark:bg-slate-800 rounded-xl p-4">
         <div className="grid grid-cols-3 sm:grid-cols-6 md:grid-cols-9 lg:grid-cols-12 xl:grid-cols-15 gap-3 max-h-52 overflow-y-auto">
-          {data.item.episodes[0].server_data.map((data, i, array) => (
-            <Link
-              href={`/xem-phim/${slug}?episode=${data.slug}`}
-              key={i}
-              type="button"
-              className={cn(
-                "text-center overflow-hidden overflow-ellipsis whitespace-nowrap p-1 rounded-lg shadow-md bg-gray-400 text-gray-50 hover:bg-violet-500 dark:bg-slate-600 dark:hover:bg-violet-600",
-                episodeData.slug === data.slug &&
-                  "bg-violet-500 dark:bg-violet-600"
-              )}
-            >
-              {array.length > 1 ? `Tập ${data.name}` : data.name}
-            </Link>
-          ))}
+          <ListEpisode datas={data.item.episodes} />
         </div>
         <div className="mt-8 flex">
           <div className="flex-[0_0_30%] md:flex-[0_0_20%] pr-2 md:pr-4">
