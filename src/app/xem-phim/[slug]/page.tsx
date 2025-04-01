@@ -142,6 +142,7 @@ export default async function WatchMovie({
               height={0}
               sizes="(min-width: 1024px) 20vw, (min-width: 640px) 25vw, 50vw"
               className="w-full h-auto object-cover rounded-lg"
+              unoptimized
             />
           </div>
 

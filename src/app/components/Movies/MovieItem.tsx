@@ -16,6 +16,7 @@ export default function MovieItem({ movie }: { movie: Movie }) {
           alt={movie.origin_name}
           sizes="(min-width: 1024px) 20vw, (min-width: 640px) 25vw, 50vw"
           className="group-hover:scale-110 transition-transform duration-500 object-cover"
+          unoptimized
         />
         <div className="absolute inset-0 invisible group-hover:bg-black/25 group-hover:visible transition-all duration-500"></div>
         <div className="absolute top-1/2 -translate-y-1/2 left-0 w-full flex justify-center opacity-0 scale-125 group-hover:opacity-100 group-hover:scale-100 transition duration-500 will-change-transform z-10">

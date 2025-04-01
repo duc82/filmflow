@@ -93,6 +93,7 @@ export default async function MovieDetail({
                 height={0}
                 sizes="(min-width: 1024px) 20vw, (min-width: 640px) 25vw, 50vw"
                 className="w-full h-auto object-cover rounded-xl"
+                unoptimized
               />
               <div className="absolute bottom-0 space-x-2 text-center w-full bg-black bg-opacity-40 dark:bg-opacity-80 py-2 m-0 rounded-t-none rounded-lg">
                 <Link
@@ -323,6 +324,7 @@ export default async function MovieDetail({
                       height={0}
                       sizes="(min-width: 1024px) 20vw, (min-width: 640px) 25vw, 50vw"
                       className="group-hover:scale-110 transition-transform duration-500 w-full object-cover"
+                      unoptimized
                     />
                     <div className="absolute inset-0 invisible group-hover:bg-black/25 group-hover:visible transition-all duration-500"></div>
                     <div className="absolute top-1/2 -translate-y-1/2 left-0 w-full flex justify-center opacity-0 scale-125 group-hover:opacity-100 group-hover:scale-100 transition duration-500 will-change-transform z-10">

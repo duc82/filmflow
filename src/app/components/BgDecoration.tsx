@@ -11,6 +11,7 @@ export default function BgDecoration() {
             src={bgLight}
             alt="Background Light"
             className="w-[71.75rem] flex-none max-w-none dark:hidden"
+            unoptimized
           />
         </picture>
         <picture>
@@ -18,6 +19,7 @@ export default function BgDecoration() {
             src={bgDark}
             alt="Background Dark"
             className="w-[90rem] flex-none max-w-none hidden dark:block"
+            unoptimized
           />
         </picture>
       </div>

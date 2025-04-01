@@ -56,7 +56,7 @@ export default function Header() {
           <div className="mr-4 flex-none relative">
             <span className="sr-only"></span>
             <Link href="/">
-              <Image src={logo} width={150} alt="Logo" />
+              <Image src={logo} width={150} alt="Logo" unoptimized />
             </Link>
           </div>
           <div className="hidden xl:block">
