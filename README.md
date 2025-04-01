@@ -14,6 +14,11 @@
 
 ![Minh Họa](image.png)
 
+## 🌐 Demo
+
+- Netlify: https://filmflow-next.netlify.app/
+- Vercel: https://filmflow-next.vercel.app/
+
 ## 🛠️ Công nghệ sử dụng
 
 - **Next.js** - Framework React giúp tối ưu hiệu suất
