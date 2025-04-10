@@ -1,6 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 :root {
   --color-background: 225 19% 8%;
@@ -12,6 +13,10 @@
   --slide-size-sm: calc(100% / 3);
   --slide-size-md: calc(100% / 4);
   --slide-size-lg: calc(100% / 5);
+}
+
+@theme {
+  --grid-cols-15: repeat(15, minmax(0, 1fr));
 }
 
 @layer base {
