@@ -114,12 +114,12 @@ export default function Header() {
                     <MenuButton
                       as="button"
                       aria-label="Thể Loại"
-                      className="flex items-center hover:text-sky-500 dark:hover:text-sky-400"
+                      className="cursor-pointer flex items-center hover:text-sky-500 dark:hover:text-sky-400"
                     >
                       Thể Loại
                       <ChevronDownIcon className="w-5 h-5 ml-1.5 text-violet-400 hover:text-violet-800" />
                     </MenuButton>
-                    <MenuItems className="absolute right-0 w-[450px] mt-8 origin-top-right bg-white dark:bg-slate-800 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transform opacity-100 scale-100">
+                    <MenuItems className="absolute right-0 w-[450px] mt-8 origin-top-right bg-white dark:bg-slate-800 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black/5 focus:outline-none transform opacity-100 scale-100">
                       <div className="px-1 py-1 grid grid-flow-rows grid-cols-3 justify-items-center">
                         {categories.map((category) => (
                           <MenuItem key={category.slug}>
@@ -140,12 +140,12 @@ export default function Header() {
                     <MenuButton
                       as="button"
                       aria-label="Quốc Gia"
-                      className="flex items-center hover:text-sky-500 dark:hover:text-sky-400"
+                      className="cursor-pointer flex items-center hover:text-sky-500 dark:hover:text-sky-400"
                     >
                       Quốc Gia
                       <ChevronDownIcon className="w-5 h-5 ml-1.5 text-violet-400 hover:text-violet-800" />
                     </MenuButton>
-                    <MenuItems className="absolute right-0 w-[450px] mt-8 origin-top-right bg-white dark:bg-slate-800 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transform opacity-100 scale-100">
+                    <MenuItems className="absolute right-0 w-[450px] mt-8 origin-top-right bg-white dark:bg-slate-800 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black/5 focus:outline-none transform opacity-100 scale-100">
                       <div className="px-1 py-1 grid grid-flow-rows grid-cols-3 justify-items-center">
                         {nationals.map((national) => (
                           <MenuItem key={national.slug}>
@@ -175,7 +175,7 @@ export default function Header() {
             <div className="flex items-center ml-4">
               <label className="sr-only">Theme</label>
               <Menu as="div" className="relative flex text-left">
-                <MenuButton className="inline-flex justify-center w-full text-sm font-medium rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                <MenuButton className="inline-flex justify-center cursor-pointer w-full text-sm font-medium rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
                   <SunIcon className="block dark:hidden w-6 h-6" />
                   <MoonIcon className="hidden dark:block w-6 h-6" />
                 </MenuButton>
