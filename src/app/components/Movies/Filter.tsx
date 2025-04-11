@@ -103,10 +103,7 @@ export default function Filter({
       <form onSubmit={handleFilter} className="lg:flex gap-2 items-center">
         <div className="p-2 flex justify-between">
           <span>Lọc Phim</span>
-          <div
-            className="block lg:hidden cursor-pointer"
-            onClick={() => setIsOpen(!isOpen)}
-          >
+          <div className="block lg:hidden" onClick={() => setIsOpen(!isOpen)}>
             <ChevronDoubleDownIcon className="size-6" />
           </div>
         </div>

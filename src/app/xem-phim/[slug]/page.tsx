@@ -13,6 +13,8 @@ import ArtPlayer from "@/app/libs/ArtPlayer";
 import ListServer from "@/app/components/Movie/ListServer";
 import ListEpisode from "@/app/components/Movie/ListEpisode";
 
+export const revalidate = 60 * 15; // 15 minutes
+
 export const generateMetadata = async ({
   params,
 }: {

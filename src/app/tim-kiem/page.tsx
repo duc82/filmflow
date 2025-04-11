@@ -8,6 +8,8 @@ import { MovieResponse } from "@/app/types/movie";
 import { HomeIcon } from "@heroicons/react/24/solid";
 import { Metadata } from "next";
 
+export const revalidate = 60 * 15; // 15 minutes
+
 export const generateMetadata = async ({
   searchParams,
 }: {

@@ -9,6 +9,8 @@ import { HomeIcon } from "@heroicons/react/24/solid";
 import { Metadata } from "next";
 import queryString from "query-string";
 
+export const revalidate = 60 * 15; // 15 minutes
+
 export const generateMetadata = async ({
   params,
   searchParams,
