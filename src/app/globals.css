@@ -35,6 +35,10 @@
   dd {
     @apply leading-6 font-normal;
   }
+
+  button {
+    @apply cursor-pointer;
+  }
 }
 
 @layer components {

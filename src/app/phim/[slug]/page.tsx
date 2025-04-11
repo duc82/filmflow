@@ -17,6 +17,8 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
+export const revalidate = 60 * 15; // 15 minutes
+
 export const generateMetadata = async ({
   params,
 }: {
@@ -98,7 +100,7 @@ export default async function MovieDetail({
                 <Link
                   href={data.item.trailer_url}
                   target="_blank"
-                  className="cursor-pointer hover:bg-opacity-80 bg-blue-500 text-gray-50 dark:text-gray-50 inline-block px-1 py-1 rounded"
+                  className="hover:bg-opacity-80 bg-blue-500 text-gray-50 dark:text-gray-50 inline-block px-1 py-1 rounded"
                 >
                   Trailer
                 </Link>
@@ -108,7 +110,7 @@ export default async function MovieDetail({
                     <DownloadButton />
                     <Link
                       href={`/xem-phim/${slug}`}
-                      className="cursor-pointer hover:bg-opacity-80 bg-red-500 text-gray-50 dark:text-gray-50 inline-block px-1 py-1 rounded"
+                      className="hover:bg-opacity-80 bg-red-500 text-gray-50 dark:text-gray-50 inline-block px-1 py-1 rounded"
                     >
                       Xem Phim
                     </Link>

@@ -5,6 +5,8 @@ import { getHome } from "../services/indexService";
 import { getMovies, searchMovies } from "../services/movieService";
 import { MovieResponse } from "../types/movie";
 
+export const revalidate = 60 * 15; // 15 minutes
+
 export const generateMetadata = async (): Promise<Metadata> => {
   const data = await getHome<MovieResponse>();
 

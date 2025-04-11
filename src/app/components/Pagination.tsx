@@ -45,7 +45,7 @@ export default function Pagination({
         <button
           type="button"
           onClick={() => handleChange(page - 1)}
-          className="relative inline-flex items-center px-2 py-2 rounded-l-md border bg-white dark:bg-slate-700/10 dark:bg-gray-800 border-gray-300 text-gray-700 dark:border-gray-600 hover:bg-gray-300 dark:hover:bg-gray-900 text-sm font-medium"
+          className="relative inline-flex items-center px-2 py-2 rounded-l-md border bg-white dark:bg-slate-700/10 border-gray-300 text-gray-700 dark:border-gray-600 hover:bg-gray-300 dark:hover:bg-gray-900 text-sm font-medium"
         >
           <ArrowLongLeftIcon className="size-5" />
         </button>
