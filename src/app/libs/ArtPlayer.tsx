@@ -26,7 +26,7 @@ function playM3u8(video: HTMLVideoElement, url: string, art: Artplayer) {
   } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
     video.src = url;
   } else {
-    art.notice.show = "Unsupported playback format: m3u8";
+    art.notice.show = "Không hỗ trợ định dạng playback: m3u8";
   }
 }
 
@@ -197,18 +197,18 @@ export default function ArtPlayer({
       const art = artRef.current;
       if (!art || isSearchFocus) return;
 
-      if (e.key === "m" || e.key === "M") {
+      if (e.key.toLocaleLowerCase() === "m") {
         art.muted = !art.muted;
       }
-      if (e.key === "f" || e.key === "F") {
+      if (e.key.toLowerCase() === "f") {
         art.fullscreen = !art.fullscreen;
       }
 
-      if (e.key === "i" || e.key === "I") {
+      if (e.key.toLowerCase() === "i") {
         art.pip = !art.pip;
       }
 
-      if (e.key === "k" || e.key === "K") {
+      if (e.key.toLowerCase() === "k") {
         if (art.video.paused) {
           art.play();
         } else {
