@@ -9,7 +9,9 @@ import { HomeIcon } from "@heroicons/react/24/solid";
 import { Metadata } from "next";
 import queryString from "query-string";
 
-export const revalidate = 60 * 15; // 15 minutes
+export const revalidate = process.env.NEXT_PUBLIC_REVALIDATE_TIME
+  ? +process.env.NEXT_PUBLIC_REVALIDATE_TIME
+  : 0;
 
 export const generateMetadata = async ({
   params,
