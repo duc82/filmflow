@@ -17,9 +17,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-export const revalidate = process.env.NEXT_PUBLIC_REVALIDATE_TIME
-  ? +process.env.NEXT_PUBLIC_REVALIDATE_TIME
-  : 0;
+export const revalidate = 900;
 
 export const generateMetadata = async ({
   params,

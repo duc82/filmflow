@@ -13,9 +13,7 @@ import ArtPlayer from "@/app/libs/ArtPlayer";
 import ListServer from "@/app/components/Movie/ListServer";
 import ListEpisode from "@/app/components/Movie/ListEpisode";
 
-export const revalidate = process.env.NEXT_PUBLIC_REVALIDATE_TIME
-  ? +process.env.NEXT_PUBLIC_REVALIDATE_TIME
-  : 0;
+export const revalidate = 900;
 
 export const generateMetadata = async ({
   params,
