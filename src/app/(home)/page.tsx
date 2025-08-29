@@ -5,6 +5,8 @@ import { getMetadata } from "../services/indexService";
 import { getMovies, searchMovies } from "../services/movieService";
 import { MovieResponse } from "../types/movie";
 
+export const revalidate = Number(process.env.NEXT_PUBLIC_REVALIDATE || 0);
+
 export const generateMetadata = async (): Promise<Metadata> => {
   const data = await getMetadata<MovieResponse>();
 

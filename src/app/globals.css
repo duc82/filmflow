@@ -43,6 +43,7 @@
 
 @layer components {
   /* embla */
+
   .embla {
     @apply relative m-auto;
   }
@@ -51,28 +52,51 @@
     @apply overflow-hidden;
   }
 
-  .embla__container {
+  /* Movie List */
+  .embla__movies .embla__container {
     @apply flex touch-pan-y touch-pinch-zoom ml-[calc(var(--slide-gap)*-1)];
     backface-visibility: hidden;
   }
 
-  .embla__slide {
+  .embla__movies .embla__slide {
     @apply flex-[0_0_var(--slide-size)] sm:flex-[0_0_var(--slide-size-sm)] md:flex-[0_0_var(--slide-size-md)] lg:flex-[0_0_var(--slide-size-lg)] pl-4;
   }
 
-  .embla__prev {
+  .embla__movies .embla__prev {
     @apply left-[-12px] md:left-[-18px];
     top: calc((320px / 2) - var(--embla-navigation-size) / 2);
   }
 
-  .embla__next {
+  .embla__movies .embla__next {
     @apply right-[-12px] md:right-[-18px];
     top: calc((320px / 2) - var(--embla-navigation-size) / 2);
   }
 
-  .embla__prev,
-  .embla__next {
+  .embla__movies .embla__prev,
+  .embla__movies .embla__next {
     @apply cursor-pointer absolute flex items-center justify-center rounded-full font-bold bg-sky-400 text-white hover:bg-sky-500 transition-colors duration-300 z-10 w-9 h-9;
+  }
+
+  /* Actor List */
+  .embla__actors .embla__container {
+    @apply flex touch-pan-y touch-pinch-zoom backface-hidden -ml-2;
+  }
+
+  .embla__actors .embla__slide {
+    @apply flex-[0_0_calc(100%/3)] sm:flex-[0_0_calc(100%/4)] md:flex-[0_0_calc(100%/5)] lg:flex-[0_0_calc(100%/6)] pl-2;
+  }
+
+  .embla__actors .embla__prev {
+    @apply top-1/2 -translate-y-1/2 -left-[16px];
+  }
+
+  .embla__actors .embla__next {
+    @apply top-1/2 -translate-y-1/2 -right-[16px];
+  }
+
+  .embla__actors .embla__prev,
+  .embla__actors .embla__next {
+    @apply cursor-pointer absolute flex items-center justify-center rounded-full font-bold bg-sky-400 text-white hover:bg-sky-500 transition-colors duration-300 z-10 w-8 h-8;
   }
 }
 
@@ -95,4 +119,16 @@
 
 .art-control-fullscreen.hint--top:hover::after {
   transform: translateX(0) translateY(-8px);
+}
+
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply rounded-md bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply rounded-md bg-sky-400;
 }

@@ -75,3 +75,11 @@ export const getMovie = async <T>(slug: string): Promise<T> => {
   const data = await response.json();
   return data.data as T;
 };
+
+export const getActors = async <T>(movieSlug: string): Promise<T> => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API}/phim/${movieSlug}/peoples`
+  );
+  const data = await response.json();
+  return data.data as T;
+};

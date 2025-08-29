@@ -197,7 +197,7 @@ export default function Header() {
                 >
                   <MenuItem
                     as="li"
-                    className="py-1 px-2 flex items-center text-sky-500 dark:text-gray-50 hover:bg-slate-50 dark:hover:bg-slate-600"
+                    className="cursor-pointer py-1 px-2 flex items-center text-sky-500 dark:text-gray-50 hover:bg-slate-50 dark:hover:bg-slate-600"
                     onClick={() => setTheme("light")}
                   >
                     <SunIcon className="size-6 mr-2" />
@@ -205,7 +205,7 @@ export default function Header() {
                   </MenuItem>
                   <MenuItem
                     as="li"
-                    className="py-1 px-2 flex items-center text-gray-600 dark:text-sky-500 hover:bg-slate-50 dark:hover:bg-slate-600"
+                    className="cursor-pointer py-1 px-2 flex items-center text-gray-600 dark:text-sky-500 hover:bg-slate-50 dark:hover:bg-slate-600"
                     onClick={() => setTheme("dark")}
                   >
                     <MoonIcon className="size-6 mr-2" />

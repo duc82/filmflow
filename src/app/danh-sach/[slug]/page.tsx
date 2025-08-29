@@ -45,6 +45,8 @@ export const generateMetadata = async ({
   };
 };
 
+export const revalidate = Number(process.env.NEXT_PUBLIC_REVALIDATE || 0);
+
 export default async function MovieList({
   params,
   searchParams,
@@ -59,7 +61,6 @@ export default async function MovieList({
   const country = (await searchParams).country;
   const year = (await searchParams).year;
   const page = (await searchParams).page;
-  const limit = 25;
 
   const data = await getMovies<MovieResponse>(slug, {
     sort_field,
@@ -68,7 +69,7 @@ export default async function MovieList({
     page,
     country,
     year,
-    limit,
+    limit: 25,
   });
 
   const query = queryString.stringify(

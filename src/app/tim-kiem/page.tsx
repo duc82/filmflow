@@ -8,6 +8,8 @@ import { MovieResponse } from "@/app/types/movie";
 import { HomeIcon } from "@heroicons/react/24/solid";
 import { Metadata } from "next";
 
+export const revalidate = Number(process.env.NEXT_PUBLIC_REVALIDATE || 0);
+
 export const generateMetadata = async ({
   searchParams,
 }: {
@@ -63,6 +65,7 @@ export default async function Search({
     country,
     year,
     keyword,
+    limit: 25,
   });
 
   return (

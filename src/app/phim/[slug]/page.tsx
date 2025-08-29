@@ -1,7 +1,8 @@
 import Breadcrumb from "@/app/components/Breadcrumb";
+import ActorList from "@/app/components/Movie/ActorList";
 import DownloadButton from "@/app/components/Movies/DownloadButton";
-import { getIMDB } from "@/app/services/imdbService";
-import { getMovie, getMovies } from "@/app/services/movieService";
+import { getActors, getMovie, getMovies } from "@/app/services/movieService";
+import { ActorResponse } from "@/app/types/actor";
 import { MovieDetailResponse, MovieResponse } from "@/app/types/movie";
 import {
   Disclosure,
@@ -44,19 +45,11 @@ export default async function MovieDetail({
 }) {
   const { slug } = await params;
 
-  const [data, newMovie] = await Promise.all([
+  const [data, actor, newMovie] = await Promise.all([
     getMovie<MovieDetailResponse>(slug),
+    getActors<ActorResponse>(slug),
     getMovies<MovieResponse>("phim-moi-cap-nhat"),
   ]);
-
-  let rating: number | string = data.item.tmdb.vote_average;
-
-  if (!rating && data.item.imdb.id) {
-    const imdb = await getIMDB<{ rating: number }>(data.item.imdb.id);
-    rating = imdb.rating;
-  } else {
-    rating = "Đang cập nhật";
-  }
 
   return (
     <section>
@@ -83,9 +76,9 @@ export default async function MovieDetail({
         </Breadcrumb>
       </div>
       <div className="flex items-start flex-col lg:flex-row mt-2 py-2">
-        <div className="flex-[0_0_70%] mb-6 md:mb-0 md:mr-3">
+        <div className="w-full lg:flex-[0_0_70%] overflow-hidden mb-6 md:mb-0 md:mr-3">
           <div className="bg-gray-100 dark:bg-slate-800 rounded-2xl p-2 flex flex-col mb-2 md:flex-row space-y-4 md:space-y-0">
-            <div className="flex-[0_0_100%] md:flex-[0_0_40%] relative">
+            <div className="flex-[0_0_100%] md:flex-[0_0_40%] w-full relative">
               <Image
                 src={`${process.env.NEXT_PUBLIC_CDN_IMAGE}/uploads/movies/${data.item.thumb_url}`}
                 alt={data.item.name}
@@ -95,13 +88,15 @@ export default async function MovieDetail({
                 className="w-full h-auto object-cover rounded-xl"
               />
               <div className="absolute bottom-0 space-x-2 text-center w-full bg-black bg-opacity-40 dark:bg-opacity-80 py-2 m-0 rounded-t-none rounded-lg">
-                <Link
-                  href={data.item.trailer_url}
-                  target="_blank"
-                  className="hover:bg-opacity-80 bg-blue-500 text-gray-50 dark:text-gray-50 inline-block px-1 py-1 rounded"
-                >
-                  Trailer
-                </Link>
+                {data.item.trailer_url && (
+                  <Link
+                    href={data.item.trailer_url}
+                    target="_blank"
+                    className="hover:bg-opacity-80 bg-blue-500 text-gray-50 dark:text-gray-50 inline-block px-1 py-1 rounded"
+                  >
+                    Trailer
+                  </Link>
+                )}
 
                 {data.item.episodes[0].server_data[0].link_m3u8 && (
                   <>
@@ -142,10 +137,21 @@ export default async function MovieDetail({
                     </tr>
                     <tr className="border-t border-slate-200 dark:border-slate-400/20">
                       <td className="py-1 pr-2 leading-5 text-sky-500 whitespace-nowrap dark:text-sky-400">
+                        TMDB
+                      </td>
+                      <td className="py-1 pl-2 leading-5 text-indigo-600 whitespace-normal dark:text-indigo-300">
+                        {data.item.tmdb.vote_average
+                          ? Number(data.item.tmdb.vote_average).toFixed(1)
+                          : "N/A"}{" "}
+                        / 10 ({data.item.tmdb.vote_count})
+                      </td>
+                    </tr>
+                    <tr className="border-t border-slate-200 dark:border-slate-400/20">
+                      <td className="py-1 pr-2 leading-5 text-sky-500 whitespace-nowrap dark:text-sky-400">
                         IMDB
                       </td>
                       <td className="py-1 pl-2 leading-5 text-indigo-600 whitespace-normal dark:text-indigo-300">
-                        {rating}
+                        N/A / 10
                       </td>
                     </tr>
                     <tr className="border-t border-slate-200 dark:border-slate-400/20">
@@ -282,6 +288,20 @@ export default async function MovieDetail({
                   "Link phim đang được cập nhật"}
               </DisclosurePanel>
             </Disclosure>
+
+            <Disclosure defaultOpen={true}>
+              <DisclosureButton className="group flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-sky-900 bg-sky-300 dark:text-sky-400 dark:bg-sky-900 rounded-lg focus:outline-none focus-visible:ring focus-visible:ring-sky-500 focus-visible:ring-opacity-75">
+                <span>Diễn viên</span>
+                <ChevronUpIcon className="size-5 fill-sky-500 group-data-[open]:rotate-180" />
+              </DisclosureButton>
+              <DisclosurePanel className="px-4 pb-2 text-sm text-gray-500 dark:text-gray-200">
+                <ActorList
+                  peoples={actor.peoples}
+                  profile_url_base={actor.profile_sizes.h632}
+                />
+              </DisclosurePanel>
+            </Disclosure>
+
             <Disclosure defaultOpen={true}>
               <DisclosureButton className="group flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-sky-900 bg-sky-300 dark:text-sky-400 dark:bg-sky-900 rounded-lg focus:outline-none focus-visible:ring focus-visible:ring-sky-500 focus-visible:ring-opacity-75">
                 <span>Tags</span>
@@ -303,7 +323,7 @@ export default async function MovieDetail({
             </Disclosure>
           </div>
         </div>
-        <div className="flex-[0_0_30%] md:ml-3">
+        <div className="w-full lg:flex-[0_0_30%] md:ml-3">
           <h1 className="font-bold uppercase text-lg text-slate-700 dark:text-white">
             {newMovie.titlePage}
           </h1>
@@ -336,9 +356,7 @@ export default async function MovieDetail({
                         {movie.name} ({movie.year})
                       </Link>
                     </h2>
-                    {/* <p className="text-sm text-slate-500 dark:text-slate-400">
-                      {movie.year}
-                    </p> */}
+
                     <div>
                       {movie.category.map((category, i) => (
                         <span key={i}>
