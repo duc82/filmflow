@@ -1,6 +1,4 @@
-export type SearchParams = Promise<{
-  [key: string]: string | undefined;
-}>;
+export type SearchParams = Promise<Record<string, string | undefined>>;
 
 export type Params<T> = Promise<T>;
 
@@ -11,4 +9,5 @@ export interface Filter {
   page: string;
   year: string;
   country: string;
+  limit: number;
 }

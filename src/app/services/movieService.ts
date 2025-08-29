@@ -1,6 +1,16 @@
 import queryString from "query-string";
 import { Filter } from "../types";
 
+export const getHome = async <T>(filter?: Partial<Filter>): Promise<T> => {
+  const query = queryString.stringify(filter || {}, {
+    skipEmptyString: true,
+  });
+
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API}/home?${query}`);
+  const data = await response.json();
+  return data.data as T;
+};
+
 export const getMovies = async <T>(
   slug: string,
   filter?: Partial<Filter>

@@ -8,8 +8,6 @@ import { MovieResponse } from "@/app/types/movie";
 import { HomeIcon } from "@heroicons/react/24/solid";
 import { Metadata } from "next";
 
-export const revalidate = 900;
-
 export const generateMetadata = async ({
   params,
   searchParams,

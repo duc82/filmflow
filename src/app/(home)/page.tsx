@@ -1,14 +1,12 @@
 import { Metadata } from "next";
 import MovieList from "../components/Home/MovieList";
 import MovieList2 from "../components/Home/MovieList2";
-import { getHome } from "../services/indexService";
+import { getMetadata } from "../services/indexService";
 import { getMovies, searchMovies } from "../services/movieService";
 import { MovieResponse } from "../types/movie";
 
-export const revalidate = 900;
-
 export const generateMetadata = async (): Promise<Metadata> => {
-  const data = await getHome<MovieResponse>();
+  const data = await getMetadata<MovieResponse>();
 
   return {
     title: data.seoOnPage.titleHead,
@@ -24,12 +22,15 @@ export const generateMetadata = async (): Promise<Metadata> => {
 export default async function Home() {
   const [newMovie, mostViewedMovie, whatMovieToWhatToday, upcomingMovie] =
     await Promise.all([
-      getMovies<MovieResponse>("phim-moi-cap-nhat"),
-      searchMovies<MovieResponse>({
+      getMovies<MovieResponse>("phim-moi"),
+      getMovies<MovieResponse>("", {
         sort_field: "view",
+        limit: 25,
       }),
       searchMovies<MovieResponse>(),
-      getMovies<MovieResponse>("phim-sap-chieu"),
+      getMovies<MovieResponse>("phim-sap-chieu", {
+        limit: 25,
+      }),
     ]);
 
   return (

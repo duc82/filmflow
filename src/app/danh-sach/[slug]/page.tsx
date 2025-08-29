@@ -9,8 +9,6 @@ import { HomeIcon } from "@heroicons/react/24/solid";
 import { Metadata } from "next";
 import queryString from "query-string";
 
-export const revalidate = 900;
-
 export const generateMetadata = async ({
   params,
   searchParams,
@@ -33,6 +31,7 @@ export const generateMetadata = async ({
     page,
     country,
     year,
+    limit: 1,
   });
 
   return {
@@ -60,6 +59,7 @@ export default async function MovieList({
   const country = (await searchParams).country;
   const year = (await searchParams).year;
   const page = (await searchParams).page;
+  const limit = 25;
 
   const data = await getMovies<MovieResponse>(slug, {
     sort_field,
@@ -68,6 +68,7 @@ export default async function MovieList({
     page,
     country,
     year,
+    limit,
   });
 
   const query = queryString.stringify(

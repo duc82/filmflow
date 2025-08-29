@@ -51,7 +51,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full flex-none lg:border-b lg:border-slate-900/10 dark:border-slate-50/[0.06] backdrop-blur bg-white/60 dark:bg-transparent">
+      <header className="sticky top-0 z-[999] w-full flex-none lg:border-b lg:border-slate-900/10 dark:border-slate-50/[0.06] backdrop-blur bg-white/60 dark:bg-transparent">
         <div className="max-w-7xl mx-auto p-4 md:px-6 lg:px-8 flex items-center border-b border-slate-900/10 lg:border-none dark:border-slate-300/10">
           <div className="mr-4 flex-none relative">
             <span className="sr-only"></span>
@@ -74,6 +74,8 @@ export default function Header() {
               />
             </form>
           </div>
+
+          {/* Desktop */}
           <div className="hidden xl:flex items-center ml-auto">
             <nav className="text-sm leading-6 font-semibold text-slate-700 dark:text-slate-200">
               <ul className="flex space-x-8">
@@ -110,7 +112,7 @@ export default function Header() {
                   </Link>
                 </li>
                 <li>
-                  <Menu as="div" className="relative">
+                  <Menu as="div">
                     <MenuButton
                       as="button"
                       aria-label="Thể Loại"
@@ -119,7 +121,11 @@ export default function Header() {
                       Thể Loại
                       <ChevronDownIcon className="w-5 h-5 ml-1.5 text-violet-400 hover:text-violet-800" />
                     </MenuButton>
-                    <MenuItems className="absolute right-0 w-[450px] mt-8 origin-top-right bg-white dark:bg-slate-800 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black/5 focus:outline-none transform opacity-100 scale-100">
+                    <MenuItems
+                      anchor="bottom end"
+                      transition
+                      className="z-[999] origin-top-right w-[450px] mt-8 bg-white dark:bg-slate-800 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black/5 focus:outline-none data-closed:scale-95 data-closed:opacity-0 transition duration-200 ease-out"
+                    >
                       <div className="px-1 py-1 grid grid-flow-rows grid-cols-3 justify-items-center">
                         {categories.map((category) => (
                           <MenuItem key={category.slug}>
@@ -136,7 +142,7 @@ export default function Header() {
                   </Menu>
                 </li>
                 <li>
-                  <Menu as="div" className="relative">
+                  <Menu as="div">
                     <MenuButton
                       as="button"
                       aria-label="Quốc Gia"
@@ -145,7 +151,11 @@ export default function Header() {
                       Quốc Gia
                       <ChevronDownIcon className="w-5 h-5 ml-1.5 text-violet-400 hover:text-violet-800" />
                     </MenuButton>
-                    <MenuItems className="absolute right-0 w-[450px] mt-8 origin-top-right bg-white dark:bg-slate-800 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black/5 focus:outline-none transform opacity-100 scale-100">
+                    <MenuItems
+                      anchor="bottom end"
+                      transition
+                      className="z-[999] origin-top-right w-[450px] mt-8 bg-white dark:bg-slate-800 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black/5 focus:outline-none data-closed:scale-95 data-closed:opacity-0 transition duration-200 ease-out"
+                    >
                       <div className="px-1 py-1 grid grid-flow-rows grid-cols-3 justify-items-center">
                         {nationals.map((national) => (
                           <MenuItem key={national.slug}>
@@ -267,9 +277,10 @@ export default function Header() {
         </div>
       </div>
 
+      {/* Mobile */}
       <div
         className={cn(
-          "fixed top-0 right-0 bottom-0 z-50 invisible transition-all duration-300",
+          "fixed top-0 right-0 bottom-0 invisible transition-all duration-300 z-[9999]",
           isOpenNavbar && "visible"
         )}
       >
