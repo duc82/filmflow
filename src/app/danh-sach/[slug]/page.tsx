@@ -45,7 +45,7 @@ export const generateMetadata = async ({
   };
 };
 
-export const revalidate = Number(process.env.NEXT_PUBLIC_REVALIDATE || 0);
+export const revalidate = 900;
 
 export default async function MovieList({
   params,
