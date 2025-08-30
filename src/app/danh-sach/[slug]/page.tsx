@@ -2,6 +2,7 @@ import Breadcrumb from "@/app/components/Breadcrumb";
 import Filter from "@/app/components/Movies/Filter";
 import MovieItem from "@/app/components/Movies/MovieItem";
 import Pagination from "@/app/components/Pagination";
+import { limit } from "@/app/constants/pagination";
 import { getMovies } from "@/app/services/movieService";
 import { SearchParams } from "@/app/types";
 import { MovieResponse } from "@/app/types/movie";
@@ -69,7 +70,7 @@ export default async function MovieList({
     page,
     country,
     year,
-    limit: 25,
+    limit,
   });
 
   const query = queryString.stringify(
@@ -149,7 +150,6 @@ export default async function MovieList({
             limit={data.params.pagination.totalItemsPerPage}
             total={data.params.pagination.totalItems}
             pageRange={data.params.pagination.pageRange}
-            siblings={3}
           />
         </div>
       </div>

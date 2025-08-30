@@ -30,6 +30,7 @@ export const generateMetadata = async ({
     page,
     country,
     year,
+    limit: 1,
   });
 
   return {
@@ -42,6 +43,8 @@ export const generateMetadata = async ({
     },
   };
 };
+
+export const revalidate = 900;
 
 export default async function Category({
   params,
@@ -136,7 +139,6 @@ export default async function Category({
             limit={data.params.pagination.totalItemsPerPage}
             total={data.params.pagination.totalItems}
             pageRange={data.params.pagination.pageRange}
-            siblings={3}
           />
         </div>
       </div>

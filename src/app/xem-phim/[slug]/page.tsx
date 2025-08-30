@@ -22,6 +22,8 @@ export const generateMetadata = async ({
 
   const data = await getMovie<MovieDetailResponse>(slug);
 
+  if (!data) return {};
+
   return {
     title: data.seoOnPage.titleHead,
     description: data.seoOnPage.descriptionHead,
@@ -44,6 +46,10 @@ export default async function WatchMovie({
 
   const data = await getMovie<MovieDetailResponse>(slug);
 
+  if (!data) {
+    notFound();
+  }
+
   const youMightAlsoLikeData = await getMoviesByCategory<MovieResponse>(
     data.item.category[0].slug
   );
@@ -55,8 +61,8 @@ export default async function WatchMovie({
       (server) => server.slug === episode
     ) || data.item.episodes[0].server_data[0];
 
-  if (!data || !episodeData.link_m3u8) {
-    return notFound();
+  if (!episodeData.link_m3u8) {
+    notFound();
   }
 
   return (

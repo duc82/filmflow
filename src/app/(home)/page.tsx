@@ -4,6 +4,7 @@ import MovieList2 from "../components/Home/MovieList2";
 import { getMetadata } from "../services/indexService";
 import { getMovies, searchMovies } from "../services/movieService";
 import { MovieResponse } from "../types/movie";
+import { limit } from "../constants/pagination";
 
 export const revalidate = 900;
 
@@ -27,11 +28,11 @@ export default async function Home() {
       getMovies<MovieResponse>("phim-moi"),
       getMovies<MovieResponse>("", {
         sort_field: "view",
-        limit: 25,
+        limit,
       }),
       searchMovies<MovieResponse>(),
       getMovies<MovieResponse>("phim-sap-chieu", {
-        limit: 25,
+        limit,
       }),
     ]);
 

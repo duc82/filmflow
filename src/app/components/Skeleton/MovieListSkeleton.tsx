@@ -1,48 +1,27 @@
 "use client";
+import { useParams } from "next/navigation";
+import Filter from "../Movies/Filter";
 
-interface MovieListSkeletonProps {
-  length: number;
-  smLength?: number;
-  mdLength?: number;
-  lgLength?: number;
-}
-
-export default function MovieListSkeleton(props: MovieListSkeletonProps) {
-  const { length, smLength, mdLength, lgLength } = props;
+export default function MovieListSkeleton({ length }: { length: number }) {
+  const { slug } = useParams<{ slug: string }>();
 
   return (
-    <section className="pt-20">
-      <div className="relative">
-        <div className="animate-pulse h-8 w-72 bg-slate-300 dark:bg-slate-700 mb-8 rounded-lg"></div>
-        <div className="grid grid-cols-2 sm:hidden gap-4">
+    <section>
+      {/* Breadcrumb */}
+      <div className="h-[57px] flex items-center border-b border-slate-900/10 dark:border-slate-50/[0.06]">
+        <div className="animate-pulse h-6 w-64 bg-slate-300 dark:bg-slate-700 rounded-lg"></div>
+      </div>
+      <div className="mt-2 py-2 w-full">
+        {/* Movie Category */}
+        <div className="animate-pulse h-8 w-28 bg-slate-300 dark:bg-slate-700 mb-4 rounded-lg"></div>
+        <Filter
+          defaultSortField="modified.time"
+          defaultType={slug}
+          type="type"
+        />
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 lg:gap-8 py-5">
           {Array.from({ length: length }).map((_, index) => (
-            <div key={index}>
-              <div className="animate-pulse h-80 bg-slate-300 dark:bg-slate-700 mb-3 rounded-lg"></div>
-              <div className="animate-pulse h-5 bg-slate-300 dark:bg-slate-700 mb-2 rounded-lg"></div>
-              <div className="animate-pulse h-5 w-3/5 bg-slate-300 dark:bg-slate-700 rounded-lg"></div>
-            </div>
-          ))}
-        </div>
-        <div className="hidden sm:grid grid-cols-3 md:hidden gap-4">
-          {Array.from({ length: smLength || length }).map((_, index) => (
-            <div key={index}>
-              <div className="animate-pulse h-80 bg-slate-300 dark:bg-slate-700 mb-3 rounded-lg"></div>
-              <div className="animate-pulse h-5 bg-slate-300 dark:bg-slate-700 mb-2 rounded-lg"></div>
-              <div className="animate-pulse h-5 w-3/5 bg-slate-300 dark:bg-slate-700 rounded-lg"></div>
-            </div>
-          ))}
-        </div>
-        <div className="hidden md:grid grid-cols-4 lg:hidden gap-4">
-          {Array.from({ length: mdLength || length }).map((_, index) => (
-            <div key={index}>
-              <div className="animate-pulse h-80 bg-slate-300 dark:bg-slate-700 mb-3 rounded-lg"></div>
-              <div className="animate-pulse h-5 bg-slate-300 dark:bg-slate-700 mb-2 rounded-lg"></div>
-              <div className="animate-pulse h-5 w-3/5 bg-slate-300 dark:bg-slate-700 rounded-lg"></div>
-            </div>
-          ))}
-        </div>
-        <div className="hidden lg:grid grid-cols-5 gap-4">
-          {Array.from({ length: lgLength || length }).map((_, index) => (
             <div key={index}>
               <div className="animate-pulse h-80 bg-slate-300 dark:bg-slate-700 mb-3 rounded-lg"></div>
               <div className="animate-pulse h-5 bg-slate-300 dark:bg-slate-700 mb-2 rounded-lg"></div>

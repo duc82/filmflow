@@ -17,6 +17,7 @@ import {
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export const generateMetadata = async ({
   params,
@@ -26,6 +27,8 @@ export const generateMetadata = async ({
   const { slug } = await params;
 
   const data = await getMovie<MovieDetailResponse>(slug);
+
+  if (!data) return {};
 
   return {
     title: data.seoOnPage.titleHead,
@@ -50,6 +53,10 @@ export default async function MovieDetail({
     getActors<ActorResponse>(slug),
     getMovies<MovieResponse>("phim-moi-cap-nhat"),
   ]);
+
+  if (!data) {
+    notFound();
+  }
 
   return (
     <section>
@@ -87,29 +94,32 @@ export default async function MovieDetail({
                 sizes="(min-width: 1024px) 20vw, (min-width: 640px) 25vw, 50vw"
                 className="w-full h-auto object-cover rounded-xl"
               />
-              <div className="absolute bottom-0 space-x-2 text-center w-full bg-black bg-opacity-40 dark:bg-opacity-80 py-2 m-0 rounded-t-none rounded-lg">
-                {data.item.trailer_url && (
-                  <Link
-                    href={data.item.trailer_url}
-                    target="_blank"
-                    className="hover:bg-opacity-80 bg-blue-500 text-gray-50 dark:text-gray-50 inline-block px-1 py-1 rounded"
-                  >
-                    Trailer
-                  </Link>
-                )}
-
-                {data.item.episodes[0].server_data[0].link_m3u8 && (
-                  <>
-                    <DownloadButton />
+              {(data.item.trailer_url ||
+                data.item.episodes[0].server_data[0].link_m3u8) && (
+                <div className="absolute bottom-0 space-x-2 text-center w-full bg-black bg-opacity-40 dark:bg-opacity-80 py-2 m-0 rounded-t-none rounded-lg">
+                  {data.item.trailer_url && (
                     <Link
-                      href={`/xem-phim/${slug}`}
-                      className="hover:bg-opacity-80 bg-red-500 text-gray-50 dark:text-gray-50 inline-block px-1 py-1 rounded"
+                      href={data.item.trailer_url}
+                      target="_blank"
+                      className="hover:bg-opacity-80 bg-blue-500 text-gray-50 dark:text-gray-50 inline-block px-1 py-1 rounded"
                     >
-                      Xem Phim
+                      Trailer
                     </Link>
-                  </>
-                )}
-              </div>
+                  )}
+
+                  {data.item.episodes[0].server_data[0].link_m3u8 && (
+                    <>
+                      <DownloadButton />
+                      <Link
+                        href={`/xem-phim/${slug}`}
+                        className="hover:bg-opacity-80 bg-red-500 text-gray-50 dark:text-gray-50 inline-block px-1 py-1 rounded"
+                      >
+                        Xem Phim
+                      </Link>
+                    </>
+                  )}
+                </div>
+              )}
             </div>
             <div className="flex-[0_0_100%] md:flex-[0_0_60%] md:pl-4">
               <div className="text-center">

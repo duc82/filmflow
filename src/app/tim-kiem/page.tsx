@@ -7,8 +7,7 @@ import { SearchParams } from "@/app/types";
 import { MovieResponse } from "@/app/types/movie";
 import { HomeIcon } from "@heroicons/react/24/solid";
 import { Metadata } from "next";
-
-export const revalidate = 900;
+import { limit } from "../constants/pagination";
 
 export const generateMetadata = async ({
   searchParams,
@@ -31,6 +30,7 @@ export const generateMetadata = async ({
     page,
     country,
     year,
+    limit: 1,
   });
 
   return {
@@ -43,6 +43,8 @@ export const generateMetadata = async ({
     },
   };
 };
+
+export const revalidate = 900;
 
 export default async function Search({
   searchParams,
@@ -65,7 +67,7 @@ export default async function Search({
     country,
     year,
     keyword,
-    limit: 25,
+    limit,
   });
 
   return (
@@ -133,7 +135,6 @@ export default async function Search({
             limit={data.params.pagination.totalItemsPerPage}
             total={data.params.pagination.totalItems}
             pageRange={data.params.pagination.pageRange}
-            siblings={3}
           />
         </div>
       </div>

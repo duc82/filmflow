@@ -70,10 +70,14 @@ export const searchMovies = async <T>(
   return data.data as T;
 };
 
-export const getMovie = async <T>(slug: string): Promise<T> => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API}/phim/${slug}`);
-  const data = await response.json();
-  return data.data as T;
+export const getMovie = async <T>(slug: string): Promise<T | null> => {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API}/phim/${slug}`);
+    const data = await response.json();
+    return data.data as T;
+  } catch (_error) {
+    return null;
+  }
 };
 
 export const getActors = async <T>(movieSlug: string): Promise<T> => {

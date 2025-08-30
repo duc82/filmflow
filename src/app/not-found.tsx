@@ -5,11 +5,13 @@ export default function NotFound() {
     <section>
       <div className="mt-2 bg-gray-200 dark:bg-slate-800 shadow overflow-hidden sm:rounded-lg pb-8">
         <div className="text-center pt-8">
-          <h1 className="text-9xl font-bold text-purple-400">404</h1>
-          <h1 className="text-6xl font-medium py-8">
+          <h1 className="text-7xl lg:text-9xl font-bold text-purple-400">
+            404
+          </h1>
+          <h1 className="text-4xl lg:text-6xl font-medium py-8">
             Không tìm thấy trang này
           </h1>
-          <p className="text-2xl pb-8 px-12 font-medium">
+          <p className="text-2xl px-6 lg:text-2xl pb-8 lg:px-12 font-medium">
             Trang bạn đang tìm kiếm không tồn tại hoặc đã
             <br />
             bị xóa. Vui lòng kiểm tra lại hoặc quay về trang chủ.

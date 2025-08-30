@@ -2,6 +2,7 @@ import Breadcrumb from "@/app/components/Breadcrumb";
 import Filter from "@/app/components/Movies/Filter";
 import MovieItem from "@/app/components/Movies/MovieItem";
 import Pagination from "@/app/components/Pagination";
+import { limit } from "@/app/constants/pagination";
 import { getMoviesByCountry } from "@/app/services/movieService";
 import { SearchParams } from "@/app/types";
 import { MovieResponse } from "@/app/types/movie";
@@ -30,6 +31,7 @@ export const generateMetadata = async ({
     page,
     country,
     year,
+    limit: 1,
   });
 
   return {
@@ -42,6 +44,8 @@ export const generateMetadata = async ({
     },
   };
 };
+
+export const revalidate = 900;
 
 export default async function MovieList({
   params,
@@ -65,6 +69,7 @@ export default async function MovieList({
     page,
     country,
     year,
+    limit,
   });
 
   return (
@@ -136,7 +141,6 @@ export default async function MovieList({
             limit={data.params.pagination.totalItemsPerPage}
             total={data.params.pagination.totalItems}
             pageRange={data.params.pagination.pageRange}
-            siblings={3}
           />
         </div>
       </div>
