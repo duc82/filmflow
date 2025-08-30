@@ -10,6 +10,8 @@ import Header from "./components/Header";
 import RootProvider from "./providers/RootProvider";
 import ProgressBarProvider from "./providers/ProgressBarProvider";
 import Footer from "./components/Footer";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import { Metadata } from "next";
 
@@ -57,6 +59,8 @@ export default async function RootLayout({
         </ProgressBarProvider>
         <GoogleAnalytics gaId="G-4T9R83ZFLW" />
         <GoogleTagManager gtmId="GTM-PZGWJW9T" />
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
