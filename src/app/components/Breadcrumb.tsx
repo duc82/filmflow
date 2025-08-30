@@ -2,7 +2,7 @@ import Link from "next/link";
 
 function Breadcrumb({ children }: { children: React.ReactNode }) {
   return (
-    <ol className="ml-4 flex text-sm leading-6 overflow-x-auto overflow-ellipsis whitespace-nowrap min-w-0">
+    <ol className="ml-4 flex text-sm leading-6 overflow-x-auto overflow-ellipsis whitespace-nowrap">
       {children}
     </ol>
   );

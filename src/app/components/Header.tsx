@@ -348,7 +348,10 @@ export default function Header() {
                   Thể Loại
                   <ChevronDownIcon className="size-5 ml-1.5 group-data-[open]:rotate-180" />
                 </DisclosureButton>
-                <DisclosurePanel className="flex flex-col pl-2 space-y-2 mt-2 max-h-56 overflow-y-auto">
+                <DisclosurePanel
+                  transition
+                  className="flex flex-col pl-2 space-y-2 mt-2 max-h-56 overflow-y-auto transition-[height] duration-1000 data-closed:h-0"
+                >
                   {categories.map((category) => (
                     <Link
                       key={category.slug}
@@ -368,7 +371,10 @@ export default function Header() {
                   Quốc Gia
                   <ChevronDownIcon className="size-5 ml-1.5 group-data-[open]:rotate-180" />
                 </DisclosureButton>
-                <DisclosurePanel className="flex flex-col pl-2 space-y-2 mt-2 max-h-56 overflow-y-auto">
+                <DisclosurePanel
+                  transition
+                  className="flex flex-col pl-2 space-y-2 mt-2 max-h-56 overflow-y-auto transition-[height] duration-1000 data-closed:h-0"
+                >
                   {nationals.map((national) => (
                     <Link
                       key={national.slug}

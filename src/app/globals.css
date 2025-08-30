@@ -121,14 +121,14 @@
   transform: translateX(0) translateY(-8px);
 }
 
-::-webkit-scrollbar {
+body::-webkit-scrollbar {
   @apply w-2;
 }
 
-::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track {
   @apply rounded-md bg-transparent;
 }
 
-::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb {
   @apply rounded-md bg-sky-400;
 }
