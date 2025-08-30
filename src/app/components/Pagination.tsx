@@ -84,6 +84,7 @@ export default function Pagination({
       {currentPage > 1 && (
         <button
           type="button"
+          id="prev-button"
           onClick={() => handleChange(currentPage - 1)}
           className="relative inline-flex items-center px-2 py-2 rounded-l-md border bg-white dark:bg-slate-700/10 border-gray-300 text-gray-700 dark:border-gray-600 hover:bg-gray-300 dark:hover:bg-gray-900 text-sm font-medium"
         >
@@ -95,6 +96,8 @@ export default function Pagination({
         if (page === "LEFT_DOTS") {
           return (
             <button
+              type="button"
+              id="left-dots"
               key={i}
               onClick={() => handleChange(currentPage - pageRange)}
               className="group bg-white dark:bg-slate-700/10 border-gray-300 dark:border-gray-700 text-gray-500 dark:text-white/60 hover:bg-gray-50 dark:hover:bg-gray-900 inline-flex justify-center items-center px-2 py-2 min-w-10 border text-sm font-medium"
@@ -108,6 +111,8 @@ export default function Pagination({
         if (page === "RIGHT_DOTS") {
           return (
             <button
+              type="button"
+              id="right-dots"
               key={i}
               onClick={() => handleChange(currentPage + pageRange)}
               className="group bg-white dark:bg-slate-700/10 border-gray-300 dark:border-gray-700 text-gray-500 dark:text-white/60 hover:bg-gray-50 dark:hover:bg-gray-900 inline-flex justify-center items-center px-2 py-2 min-w-10 border text-sm font-medium"
@@ -120,6 +125,7 @@ export default function Pagination({
 
         return (
           <button
+            type="button"
             key={i}
             onClick={() => handleChange(page as number)}
             className={clsx(
@@ -136,6 +142,7 @@ export default function Pagination({
       {currentPage < pageCount && (
         <button
           type="button"
+          id="next-button"
           onClick={() => handleChange(currentPage + 1)}
           className="relative inline-flex items-center px-2 py-2 rounded-r-md border bg-white dark:bg-slate-700/10 border-gray-300 text-gray-700 dark:border-gray-600 hover:bg-gray-300 dark:hover:bg-gray-900 text-sm font-medium"
         >

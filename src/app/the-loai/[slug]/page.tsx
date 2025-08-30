@@ -15,13 +15,13 @@ export const generateMetadata = async ({
   params: Promise<{ slug: string }>;
   searchParams: SearchParams;
 }): Promise<Metadata> => {
-  const { slug } = await params;
-  const sort_field = (await searchParams).sort_field || "modified.time";
-  const sort_type = (await searchParams).sort_type || "desc";
-  const category = (await searchParams).category;
-  const country = (await searchParams).country;
-  const year = (await searchParams).year;
-  const page = (await searchParams).page;
+  const [{ slug }, sp] = await Promise.all([params, searchParams]);
+  const sort_field = sp.sort_field || "modified.time";
+  const sort_type = sp.sort_type || "desc";
+  const category = sp.category;
+  const country = sp.country;
+  const year = sp.year;
+  const page = sp.page;
 
   const data = await getMoviesByCategory<MovieResponse>(slug, {
     sort_field,
@@ -53,13 +53,13 @@ export default async function Category({
   params: Promise<{ slug: string }>;
   searchParams: SearchParams;
 }) {
-  const { slug } = await params;
-  const sort_field = (await searchParams).sort_field || "modified.time";
-  const sort_type = (await searchParams).sort_type || "desc";
-  const category = (await searchParams).category;
-  const country = (await searchParams).country;
-  const year = (await searchParams).year;
-  const page = (await searchParams).page;
+  const [{ slug }, sp] = await Promise.all([params, searchParams]);
+  const sort_field = sp.sort_field || "modified.time";
+  const sort_type = sp.sort_type || "desc";
+  const category = sp.category;
+  const country = sp.country;
+  const year = sp.year;
+  const page = sp.page;
 
   const data = await getMoviesByCategory<MovieResponse>(slug, {
     sort_field,
@@ -75,6 +75,7 @@ export default async function Category({
       <div className="flex items-center py-4 border-b border-slate-900/10 dark:border-slate-50/[0.06]">
         <button
           type="button"
+          id="home-button"
           className="text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
         >
           <HomeIcon className="w-6 h-6" />

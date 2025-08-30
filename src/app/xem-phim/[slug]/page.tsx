@@ -12,6 +12,7 @@ import { Metadata } from "next";
 import ArtPlayer from "@/app/libs/ArtPlayer";
 import ListServer from "@/app/components/Movie/ListServer";
 import ListEpisode from "@/app/components/Movie/ListEpisode";
+import { limit } from "@/app/constants/pagination";
 
 export const generateMetadata = async ({
   params,
@@ -51,7 +52,10 @@ export default async function WatchMovie({
   }
 
   const youMightAlsoLikeData = await getMoviesByCategory<MovieResponse>(
-    data.item.category[0].slug
+    data.item.category[0].slug,
+    {
+      limit,
+    }
   );
 
   const episode = sp.episode;
@@ -70,6 +74,7 @@ export default async function WatchMovie({
       <div className="flex items-center py-4 border-b border-slate-900/10 dark:border-slate-50/[0.06]">
         <button
           type="button"
+          id="home-button"
           className="text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
         >
           <HomeIcon className="w-6 h-6" />

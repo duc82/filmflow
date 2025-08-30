@@ -57,10 +57,15 @@ export default async function RootLayout({
             </RootProvider>
           </ThemeProvider>
         </ProgressBarProvider>
-        <GoogleAnalytics gaId="G-4T9R83ZFLW" />
-        <GoogleTagManager gtmId="GTM-PZGWJW9T" />
-        <SpeedInsights />
-        <Analytics />
+
+        {process.env.NODE_ENV === "production" && (
+          <>
+            <GoogleAnalytics gaId="G-4T9R83ZFLW" />
+            <GoogleTagManager gtmId="GTM-PZGWJW9T" />
+            <SpeedInsights />
+            <Analytics />
+          </>
+        )}
       </body>
     </html>
   );

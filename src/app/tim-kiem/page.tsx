@@ -14,13 +14,14 @@ export const generateMetadata = async ({
 }: {
   searchParams: SearchParams;
 }): Promise<Metadata> => {
-  const keyword = (await searchParams).keyword || "";
-  const sort_field = (await searchParams).sort_field || "modified.time";
-  const sort_type = (await searchParams).sort_type || "desc";
-  const category = (await searchParams).category;
-  const country = (await searchParams).country;
-  const year = (await searchParams).year;
-  const page = (await searchParams).page;
+  const sp = await searchParams;
+  const keyword = sp.keyword || "";
+  const sort_field = sp.sort_field || "modified.time";
+  const sort_type = sp.sort_type || "desc";
+  const category = sp.category;
+  const country = sp.country;
+  const year = sp.year;
+  const page = sp.page;
 
   const data = await searchMovies<MovieResponse>({
     keyword,
@@ -51,13 +52,14 @@ export default async function Search({
 }: {
   searchParams: SearchParams;
 }) {
-  const keyword = (await searchParams).keyword || "";
-  const sort_field = (await searchParams).sort_field || "modified.time";
-  const sort_type = (await searchParams).sort_type || "desc";
-  const category = (await searchParams).category;
-  const country = (await searchParams).country;
-  const year = (await searchParams).year;
-  const page = (await searchParams).page;
+  const sp = await searchParams;
+  const keyword = sp.keyword || "";
+  const sort_field = sp.sort_field || "modified.time";
+  const sort_type = sp.sort_type || "desc";
+  const category = sp.category;
+  const country = sp.country;
+  const year = sp.year;
+  const page = sp.page;
 
   const data = await searchMovies<MovieResponse>({
     sort_field,
@@ -75,6 +77,7 @@ export default async function Search({
       <div className="flex items-center py-4 border-b border-slate-900/10 dark:border-slate-50/[0.06]">
         <button
           type="button"
+          id="home-button"
           className="text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
         >
           <HomeIcon className="w-6 h-6" />
