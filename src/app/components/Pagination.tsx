@@ -58,7 +58,7 @@ export default function Pagination({
 
     if ((isShowLeft && isShowRight) || (!isShowLeft && !isShowRight)) {
       const middleRange = createRange(leftSiblingIndex, rightSiblingIndex);
-      return [1, "LEFT_DOTS", ...middleRange, "LEFT_DOTS", pageCount];
+      return [1, "LEFT_DOTS", ...middleRange, "RIGHT_DOTS", pageCount];
     }
 
     return [];
@@ -69,6 +69,7 @@ export default function Pagination({
   const router = useRouter();
 
   const handleChange = (page: number) => {
+    if (page < 1) page = 1;
     const urlSearchParams = new URLSearchParams(searchParams);
     urlSearchParams.set("page", page.toString());
     const url = `${pathname}?${urlSearchParams.toString()}`;
