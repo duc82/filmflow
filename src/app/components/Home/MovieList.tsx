@@ -28,9 +28,9 @@ export default function MovieList({
   return (
     <section className="pt-20">
       <div className="relative">
-        <h1 className="font-semibold mb-8 text-2xl lg:text-3xl text-slate-700 dark:text-white">
+        <h2 className="font-semibold mb-8 text-2xl lg:text-3xl text-slate-700 dark:text-white">
           {title}
-        </h1>
+        </h2>
         <div className="embla embla__movies">
           <div className="embla__viewport" ref={emblaRef}>
             <div className="embla__container">

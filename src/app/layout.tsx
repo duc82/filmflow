@@ -5,7 +5,6 @@ import { getCategories } from "./services/categoryService";
 import { CategoryReponse } from "./types/category";
 import { getNationals } from "./services/nationalService";
 import { NationalReponse } from "./types/national";
-import BgDecoration from "./components/BgDecoration";
 import Header from "./components/Header";
 import RootProvider from "./providers/RootProvider";
 import ProgressBarProvider from "./providers/ProgressBarProvider";
@@ -14,6 +13,9 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import { Metadata } from "next";
+import { getMetadata } from "./services/indexService";
+import { MovieResponse } from "./types/movie";
+import BgDecoration from "./components/BgDecoration";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,8 +27,19 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_CDN_IMAGE + "/uploads"),
+export const generateMetadata = async (): Promise<Metadata> => {
+  const data = await getMetadata<MovieResponse>();
+
+  return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_CDN_IMAGE + "/uploads"),
+    title: data.seoOnPage.titleHead,
+    description: data.seoOnPage.descriptionHead,
+    openGraph: {
+      type: data.seoOnPage.og_type,
+      images: data.seoOnPage.og_image,
+      url: data.seoOnPage.og_url,
+    },
+  };
 };
 
 export default async function RootLayout({

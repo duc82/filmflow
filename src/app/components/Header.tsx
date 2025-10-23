@@ -51,7 +51,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-[999] w-full flex-none lg:border-b lg:border-slate-900/10 dark:border-slate-50/[0.06] backdrop-blur bg-white/60 dark:bg-transparent">
+      <header className="sticky top-0 z-999 w-full flex-none lg:border-b lg:border-slate-900/10 dark:border-slate-50/6 backdrop-blur bg-white/60 dark:bg-transparent">
         <div className="max-w-7xl mx-auto p-4 md:px-6 lg:px-8 flex items-center border-b border-slate-900/10 lg:border-none dark:border-slate-300/10">
           <div className="mr-4 flex-none relative">
             <span className="sr-only"></span>
@@ -124,7 +124,7 @@ export default function Header() {
                     <MenuItems
                       anchor="bottom end"
                       transition
-                      className="z-[999] origin-top-right w-[450px] mt-8 bg-white dark:bg-slate-800 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black/5 focus:outline-none data-closed:scale-95 data-closed:opacity-0 transition duration-200 ease-out"
+                      className="z-999 origin-top-right w-[450px] mt-8 bg-white dark:bg-slate-800 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black/5 focus:outline-none data-closed:scale-95 data-closed:opacity-0 transition duration-200 ease-out"
                     >
                       <div className="px-1 py-1 grid grid-flow-rows grid-cols-3 justify-items-center">
                         {categories.map((category) => (
@@ -154,7 +154,7 @@ export default function Header() {
                     <MenuItems
                       anchor="bottom end"
                       transition
-                      className="z-[999] origin-top-right w-[450px] mt-8 bg-white dark:bg-slate-800 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black/5 focus:outline-none data-closed:scale-95 data-closed:opacity-0 transition duration-200 ease-out"
+                      className="z-999 origin-top-right w-[450px] mt-8 bg-white dark:bg-slate-800 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black/5 focus:outline-none data-closed:scale-95 data-closed:opacity-0 transition duration-200 ease-out"
                     >
                       <div className="px-1 py-1 grid grid-flow-rows grid-cols-3 justify-items-center">
                         {nationals.map((national) => (
@@ -255,7 +255,7 @@ export default function Header() {
       <div
         className={cn(
           "px-2 relative pointer-events-auto hidden",
-          isOpenSearch && "block"
+          isOpenSearch && "block",
         )}
       >
         <div className="relative block xl:hidden">
@@ -280,22 +280,22 @@ export default function Header() {
       {/* Mobile */}
       <div
         className={cn(
-          "fixed top-0 right-0 bottom-0 invisible transition-all duration-300 z-[9999]",
-          isOpenNavbar && "visible"
+          "fixed top-0 right-0 bottom-0 invisible transition-all duration-300 z-9999",
+          isOpenNavbar && "visible",
         )}
       >
         <div
           onClick={handleCloseNavbar}
           className={cn(
             "fixed inset-0 bg-black/50 opacity-0 transition-opacity duration-300",
-            isOpenNavbar && "opacity-100"
+            isOpenNavbar && "opacity-100",
           )}
         ></div>
 
         <nav
           className={cn(
             "relative bg-white shadow-lg h-full w-72 px-4 py-8 text-base font-semibold text-slate-900 dark:bg-slate-800 dark:text-slate-400 dark:highlight-white/5 translate-x-full transition-transform duration-300",
-            isOpenNavbar && "translate-x-0"
+            isOpenNavbar && "translate-x-0",
           )}
         >
           <button
@@ -346,7 +346,7 @@ export default function Header() {
               <Disclosure>
                 <DisclosureButton className="group flex items-center justify-between w-full hover:text-sky-500 dark:hover:text-sky-400">
                   Thể Loại
-                  <ChevronDownIcon className="size-5 ml-1.5 group-data-[open]:rotate-180" />
+                  <ChevronDownIcon className="size-5 ml-1.5 group-data-open:rotate-180" />
                 </DisclosureButton>
                 <DisclosurePanel
                   transition
@@ -369,7 +369,7 @@ export default function Header() {
               <Disclosure>
                 <DisclosureButton className="group flex items-center justify-between w-full hover:text-sky-500 dark:hover:text-sky-400">
                   Quốc Gia
-                  <ChevronDownIcon className="size-5 ml-1.5 group-data-[open]:rotate-180" />
+                  <ChevronDownIcon className="size-5 ml-1.5 group-data-open:rotate-180" />
                 </DisclosureButton>
                 <DisclosurePanel
                   transition

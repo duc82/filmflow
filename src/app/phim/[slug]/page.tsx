@@ -60,7 +60,7 @@ export default async function MovieDetail({
 
   return (
     <section>
-      <div className="flex items-center py-4 border-b border-slate-900/10 dark:border-slate-50/[0.06]">
+      <div className="flex items-center py-4 border-b border-slate-900/10 dark:border-slate-50/6">
         <button
           type="button"
           id="home-button"
@@ -84,7 +84,7 @@ export default async function MovieDetail({
         </Breadcrumb>
       </div>
       <div className="flex items-start flex-col lg:flex-row mt-2 py-2">
-        <div className="w-full lg:flex-[0_0_70%] overflow-hidden mb-6 md:mb-0 md:mr-3">
+        <div className="w-full lg:flex-[0_0_70%] overflow-hidden mb-6 md:mb-0 md:mr-6 sticky top-24">
           <div className="bg-gray-100 dark:bg-slate-800 rounded-2xl p-2 flex flex-col mb-2 md:flex-row space-y-4 md:space-y-0">
             <div className="flex-[0_0_100%] md:flex-[0_0_40%] w-full relative">
               <Image
@@ -124,9 +124,9 @@ export default async function MovieDetail({
             </div>
             <div className="flex-[0_0_100%] md:flex-[0_0_60%] md:pl-4">
               <div className="text-center">
-                <h1 className="uppercase text-lg font-bold text-violet-500">
+                <h2 className="uppercase text-lg font-bold text-violet-500">
                   {data.item.name}
-                </h1>
+                </h2>
                 <h2 className="italic text-sky-500">{data.item.origin_name}</h2>
               </div>
               <div className="overflow-hidden lg:overflow-auto">
@@ -254,7 +254,7 @@ export default async function MovieDetail({
             <Disclosure defaultOpen={true}>
               <DisclosureButton className="group flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-sky-900 bg-sky-300 dark:text-sky-400 dark:bg-sky-900 rounded-lg focus:outline-none focus-visible:ring focus-visible:ring-sky-500 focus-visible:ring-opacity-75">
                 <span>Nội dung phim</span>
-                <ChevronUpIcon className="size-5 fill-sky-500 group-data-[open]:rotate-180" />
+                <ChevronUpIcon className="size-5 fill-sky-500 group-data-open:rotate-180" />
               </DisclosureButton>
               <DisclosurePanel className="px-4 pb-2 text-sm text-gray-800 dark:text-gray-200">
                 <div
@@ -267,7 +267,7 @@ export default async function MovieDetail({
             <Disclosure defaultOpen={true}>
               <DisclosureButton className="group flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-sky-900 bg-sky-300 dark:text-sky-400 dark:bg-sky-900 rounded-lg focus:outline-none focus-visible:ring focus-visible:ring-sky-500 focus-visible:ring-opacity-75">
                 <span>Xem Phim</span>
-                <ChevronUpIcon className="size-5 fill-sky-500 group-data-[open]:rotate-180" />
+                <ChevronUpIcon className="size-5 fill-sky-500 group-data-open:rotate-180" />
               </DisclosureButton>
               <DisclosurePanel className="px-4 pb-2 text-sm text-gray-500 dark:text-gray-200">
                 {data.item.episodes[0].server_data[0].link_m3u8 && (
@@ -294,29 +294,30 @@ export default async function MovieDetail({
                     </div>
                   </>
                 )}
-
                 {!data.item.episodes[0].server_data[0].link_m3u8 &&
                   "Link phim đang được cập nhật"}
               </DisclosurePanel>
             </Disclosure>
 
-            <Disclosure defaultOpen={true}>
-              <DisclosureButton className="group flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-sky-900 bg-sky-300 dark:text-sky-400 dark:bg-sky-900 rounded-lg focus:outline-none focus-visible:ring focus-visible:ring-sky-500 focus-visible:ring-opacity-75">
-                <span>Diễn viên</span>
-                <ChevronUpIcon className="size-5 fill-sky-500 group-data-[open]:rotate-180" />
-              </DisclosureButton>
-              <DisclosurePanel className="px-4 pb-2 text-sm text-gray-500 dark:text-gray-200">
-                <ActorList
-                  peoples={actor.peoples}
-                  profile_url_base={actor.profile_sizes.h632}
-                />
-              </DisclosurePanel>
-            </Disclosure>
+            {actor?.peoples && (
+              <Disclosure defaultOpen={true}>
+                <DisclosureButton className="group flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-sky-900 bg-sky-300 dark:text-sky-400 dark:bg-sky-900 rounded-lg focus:outline-none focus-visible:ring focus-visible:ring-sky-500 focus-visible:ring-opacity-75">
+                  <span>Diễn viên</span>
+                  <ChevronUpIcon className="size-5 fill-sky-500 group-data-open:rotate-180" />
+                </DisclosureButton>
+                <DisclosurePanel className="px-4 pb-2 text-sm text-gray-500 dark:text-gray-200">
+                  <ActorList
+                    peoples={actor.peoples}
+                    profile_url_base={actor.profile_sizes.h632}
+                  />
+                </DisclosurePanel>
+              </Disclosure>
+            )}
 
             <Disclosure defaultOpen={true}>
               <DisclosureButton className="group flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-sky-900 bg-sky-300 dark:text-sky-400 dark:bg-sky-900 rounded-lg focus:outline-none focus-visible:ring focus-visible:ring-sky-500 focus-visible:ring-opacity-75">
                 <span>Tags</span>
-                <ChevronUpIcon className="size-5 fill-sky-500 group-data-[open]:rotate-180" />
+                <ChevronUpIcon className="size-5 fill-sky-500 group-data-open:rotate-180" />
               </DisclosureButton>
               <DisclosurePanel className="px-4 pb-2 text-sm text-gray-500 dark:text-gray-200">
                 <div className="flex flex-wrap gap-2">
@@ -334,15 +335,15 @@ export default async function MovieDetail({
             </Disclosure>
           </div>
         </div>
-        <div className="w-full lg:flex-[0_0_30%] md:ml-3">
-          <h1 className="font-bold uppercase text-lg text-slate-700 dark:text-white">
+        <div className="w-full lg:grow">
+          <h2 className="font-bold uppercase text-lg text-slate-700 dark:text-white">
             {newMovie.titlePage}
-          </h1>
+          </h2>
           <hr className="my-2 border-slate-200 dark:border-slate-400/20" />
           <ul>
             {newMovie.items.slice(0, 10).map((movie) => (
               <li key={movie._id} className="group">
-                <div className="flex my-4">
+                <div className="flex my-4 last:mb-0">
                   <Link
                     href={`/phim/${movie.slug}`}
                     className="block flex-[0_0_30%] relative overflow-hidden rounded-lg"

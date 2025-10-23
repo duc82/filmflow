@@ -80,14 +80,12 @@ export default function Filter({
     }
     const obj2 = Object.fromEntries(searchParams.entries());
 
-    const newObj = {
-      ...obj,
-      ...obj2,
-    };
-
-    const query = queryString.stringify(newObj, {
-      skipEmptyString: true,
-    });
+    const query = queryString.stringify(
+      type === "search" ? { ...obj, ...obj2 } : obj,
+      {
+        skipEmptyString: true,
+      }
+    );
 
     if (type === "search") {
       router.replace(`${pathname}?${query}`);

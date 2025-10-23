@@ -23,11 +23,12 @@ export default function MovieItem({ movie }: { movie: Movie }) {
         </div>
       </Link>
       <div className="mt-3">
-        <h2 className="text-slate-700 dark:text-white font-semibold text-base lg:text-lg lg:leading-5 hover:text-sky-400 transition-colors duration-300">
-          <Link href={`/phim/${movie.slug}`}>
-            {movie.name} ({movie.year})
-          </Link>
-        </h2>
+        <Link
+          href={`/phim/${movie.slug}`}
+          className="text-slate-700 dark:text-white font-semibold text-base lg:text-lg lg:leading-5 hover:text-sky-400 transition-colors duration-300"
+        >
+          {movie.name} ({movie.year})
+        </Link>
         <div>
           {movie.category.map((category, i) => (
             <span key={i}>

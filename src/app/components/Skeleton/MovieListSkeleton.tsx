@@ -5,7 +5,7 @@ export default function MovieListSkeleton({ length }: { length: number }) {
   return (
     <section>
       {/* Breadcrumb */}
-      <div className="h-[57px] flex items-center border-b border-slate-900/10 dark:border-slate-50/[0.06]">
+      <div className="h-[57px] flex items-center border-b border-slate-900/10 dark:border-slate-50/6">
         <div className="animate-pulse h-6 w-64 bg-slate-300 dark:bg-slate-700 rounded-lg"></div>
       </div>
       <div className="mt-2 py-2 w-full">

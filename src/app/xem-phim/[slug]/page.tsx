@@ -55,14 +55,14 @@ export default async function WatchMovie({
     data.item.category[0].slug,
     {
       limit,
-    }
+    },
   );
 
   const episode = sp.episode;
 
   const episodeData =
     data.item.episodes[0].server_data.find(
-      (server) => server.slug === episode
+      (server) => server.slug === episode,
     ) || data.item.episodes[0].server_data[0];
 
   if (!episodeData.link_m3u8) {
@@ -157,9 +157,9 @@ export default async function WatchMovie({
           </div>
 
           <div className="flex-[0_0_70%] md:flex-[0_0_80%] pl-2 md:pl-4">
-            <h1 className="text-xl font-bold text-violet-500">
+            <h2 className="text-xl font-bold text-violet-500">
               {data.item.name} - Tập {episodeData.name}
-            </h1>
+            </h2>
             <h2 className="italic text-sky-500">{data.item.origin_name}</h2>
 
             <div
@@ -345,9 +345,9 @@ export default async function WatchMovie({
       </div>
 
       <div className="mt-20">
-        <h1 className="font-semibold mb-4 text-2xl lg:text-3xl text-slate-700 dark:text-white">
+        <h2 className="font-semibold mb-4 text-2xl lg:text-3xl text-slate-700 dark:text-white">
           Có Thể Bạn Cũng Thích
-        </h1>
+        </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 lg:gap-8 py-5">
           {youMightAlsoLikeData.items.map((movie) => (
             <div key={movie._id}>

@@ -87,7 +87,7 @@ export default async function MovieList({
 
   return (
     <section>
-      <div className="flex items-center py-4 border-b border-slate-900/10 dark:border-slate-50/[0.06]">
+      <div className="flex items-center py-4 border-b border-slate-900/10 dark:border-slate-50/6">
         <button
           type="button"
           id="home-button"
@@ -111,11 +111,10 @@ export default async function MovieList({
         </Breadcrumb>
       </div>
       <div className="mt-2 py-2 w-full">
-        <h1 className="mb-4 text-2xl uppercase font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#7367F0] to-[#cecbf0]">
+        <h2 className="mb-4 text-2xl uppercase font-semibold text-transparent bg-clip-text bg-linear-to-r from-[#7367F0] to-[#cecbf0]">
           {data.titlePage}
-        </h1>
+        </h2>
         <Filter defaultSortField={sort_field} defaultType={slug} type="type" />
-
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 lg:gap-8 py-5">
           {data.items.map((movie) => (
             <div key={movie._id}>

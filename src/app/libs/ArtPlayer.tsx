@@ -17,7 +17,7 @@ interface Level {
 
 function playM3u8(video: HTMLVideoElement, url: string, art: Artplayer) {
   if (Hls.isSupported()) {
-    if (art.hls) art.hls.destroy();
+    if (art.hls) (art.hls as Hls).destroy();
     const hls = new Hls();
     hls.loadSource(url);
     hls.attachMedia(video);

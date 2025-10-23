@@ -98,9 +98,9 @@ export default async function MovieList({
         </Breadcrumb>
       </div>
       <div className="mt-2 py-2 w-full">
-        <h1 className="mb-4 text-2xl uppercase font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#7367F0] to-[#cecbf0]">
+        <h2 className="mb-4 text-2xl uppercase font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#7367F0] to-[#cecbf0]">
           {data.titlePage}
-        </h1>
+        </h2>
         <Filter
           defaultSortField={sort_field}
           defaultCountry={slug}
@@ -126,7 +126,7 @@ export default async function MovieList({
                 <span className="font-medium mx-1">
                   {Math.ceil(
                     data.params.pagination.totalItems /
-                      data.params.pagination.totalItemsPerPage
+                      data.params.pagination.totalItemsPerPage,
                   )}
                 </span>
                 | Tổng
